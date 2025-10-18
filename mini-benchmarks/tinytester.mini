@@ -1,0 +1,76 @@
+
+#wait, another idea could be to save the derived info about each expr and assignment--eg, its type. or like be passing that around and stuff.
+#also, for lexical scopes: i already have the struct fields basically 'pointing' to their parent scope, the Structs
+#but i can make it so that i collect info on all local vars in a function, and make a list of linked table that points to the functions table
+
+struct Pair { 
+  int x; 
+  int y;
+  struct Struct2 s;
+  };
+struct Struct2 { int x; bool h; };
+
+int g;
+bool h;
+
+fun add(struct Pair p) int {
+  int g;
+  int t;
+  struct Pair ex;
+  bool bb;
+  bool hello;
+  ex.y=3;
+  g=3;
+  ex.x=4;
+  bb = ex==p; 
+  hello=false;
+ # t = p.p.x; #this should cause error!!
+  p.x=10;
+  p.y=5;
+  t = p.x || p.j; #wrongly performing OR on two integers. also p.j doesn't exist
+  j=5; #undeclared var
+  return p.x + p.j;
+}
+
+#fun sub(bool x, int j) int{
+ # int t;
+ # t=3+2;
+ # return t;
+
+#}
+
+fun main() void{
+  struct Pair ex;
+  struct Pair nested;
+  int myint;
+  int myint2;
+  bool mybool;
+  myint2=myint-myint;
+  myint2=myint*myint2;
+  mybool=myint==myint2;
+  mybool=myint>myint2;
+  mybool=!mybool;
+
+
+  nested = new Pair;
+  nested.x=10;
+  nested.y=12;
+  ex = new Pair;    
+  mybool = false;
+  ex.x=20;
+  ex.y=5;
+  ex.p = nested; #this should cause error!!!
+  myint = add(ex);
+  if(myint <=12){
+    print myint endl;
+  }
+  else{
+    print 0 endl;
+  }
+
+  delete ex;  
+
+
+   
+ return;
+}

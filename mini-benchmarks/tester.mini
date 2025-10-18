@@ -1,0 +1,52 @@
+
+struct Pair { int x; int y; struct Pair p; }; 
+struct C{int d;}; 
+struct B{int x; struct C c;}; 
+struct A{int y; struct B b;};
+
+int g;
+bool h;
+
+fun ex(int a, bool b, struct Pair c) int{
+  return 2;
+}
+fun sub(int x) int{
+  return x;
+}
+
+fun add(struct Pair p) int { 
+  struct A a;
+  struct B b;
+  struct C c;
+  int myint;
+  bool d;
+  myint = 3;
+  d=false;
+  sub(d);
+  ex(d,3,3,myint); #2 arguments are wrong but num args is wrong.
+  a.b.c.d = myint+1;  #error bc d doesn't exist on c, since c is an int
+  myint = a.b.c.d;    #error bc d doesn't exist on c, since c is an int
+  g=-g;
+  return 4;     #error bc d doesn't exist on c, since c is an int
+}
+
+
+
+fun main() void{
+  struct Pair ex;
+  int myint;
+  int r;
+  bool g;
+  struct Pair nested;
+  r = 19;
+  g=false;
+  if(sub(r)){
+    myint=read;
+  }
+  while(add(ex)){
+    r=-r;
+  }
+  
+
+ return;
+}

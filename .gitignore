@@ -1,0 +1,10 @@
+archive/
+__pycache__/
+Mini.interp
+Mini.tokens
+MiniLexer.interp
+MiniLexer.py 
+MiniLexer.tokens
+MiniParser.py
+MiniVisitor.py
+

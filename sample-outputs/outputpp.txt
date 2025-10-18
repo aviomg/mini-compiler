@@ -1,0 +1,61 @@
+Parse successful.
+ERROR. Unexpected argument in call to fun 'sub'. expected int, found bool. #25
+ERROR. Expected 3 positional arguments and got 4 for fun 'ex'. #26
+ERROR. Unexpected expression: conditional expression must evaluate to bool; found int. #43
+ERROR. Unexpected expression: conditional expression must evaluate to bool; found int. #46
+
+Structs
+| name   |   line |   num_fields |
+|:-------|-------:|-------------:|
+| A      |      5 |            2 |
+| B      |      4 |            2 |
+| C      |      3 |            1 |
+| Pair   |      2 |            3 |
+
+Struct Fields
+| struct   | field   | type        |
+|:---------|:--------|:------------|
+| A        | b       | struct B    |
+| A        | y       | int         |
+| B        | c       | struct C    |
+| B        | x       | int         |
+| C        | d       | int         |
+| Pair     | p       | struct Pair |
+| Pair     | x       | int         |
+| Pair     | y       | int         |
+
+Functions
+| name   |   line | params                 | ret   |
+|:-------|-------:|:-----------------------|:------|
+| add    |     17 | struct Pair            | int   |
+| ex     |     10 | int, bool, struct Pair | int   |
+| main   |     35 |                        | void  |
+| sub    |     13 | int                    | int   |
+
+Globals
+| name   |   line | type   |
+|:-------|-------:|:-------|
+| g      |      7 | int    |
+| h      |      8 | bool   |
+
+Locals
+| function   | name   | type        | kind   |   line |
+|:-----------|:-------|:------------|:-------|-------:|
+| add        | a      | struct A    |        |     18 |
+| add        | b      | struct B    |        |     19 |
+| add        | c      | struct C    |        |     20 |
+| add        | d      | bool        |        |     22 |
+| add        | myint  | int         |        |     21 |
+| add        | p      | struct Pair |        |     17 |
+| ex         | a      | int         |        |     10 |
+| ex         | b      | bool        |        |     10 |
+| ex         | c      | struct Pair |        |     10 |
+| main       | ex     | struct Pair |        |     36 |
+| main       | g      | bool        |        |     39 |
+| main       | myint  | int         |        |     37 |
+| main       | nested | struct Pair |        |     40 |
+| main       | r      | int         |        |     38 |
+| sub        | x      | int         |        |     13 |
+
+
+Graphviz AST written to out.svg

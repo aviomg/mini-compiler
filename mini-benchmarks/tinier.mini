@@ -1,0 +1,31 @@
+struct Pair { int x; int y; };
+int g;
+bool g;
+fun add(struct Pair p, int p) int {
+  int t;
+  p.x=10;
+  p.y=5;
+  t = p.x + p.y;
+  p=5;
+  return t;
+}
+fun main() void{
+  struct Pair ex;
+  int myint;
+  bool mybool;
+  ex = new Pair;
+  mybool = false;
+  ex.x=20;
+  ex.y=5;
+  myint = add(ex);
+  if(myint <=12){
+    print myint endl;
+  }
+  else{
+    print 0 endl;
+  }
+
+  delete ex;   
+   
+ return;
+}

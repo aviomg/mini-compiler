@@ -1,0 +1,219 @@
+Parse successful.
+ERROR. No main function found. #2
+calling accept for j
+structtype is struct Pair
+calling get struct name on struct Pair
+calling get struct name on struct Pair
+structname is Pair. also rn field is j
+checking field x
+checking field j
+calling accept for g
+calling accept for x
+structtype is struct Pair
+calling get struct name on struct Pair
+calling get struct name on struct Pair
+structname is Pair. also rn field is x
+checking field x
+calling accept for bb
+op is == and the one in list is ||. len of op is 2
+op:==
+lt:struct Pair
+rt:struct Pair
+ERROR. Assigning a value of type binary expr to a variable of type bool: 'bb'. #22
+calling accept for hello
+calling accept for x
+structtype is struct Pair
+calling get struct name on struct Pair
+calling get struct name on struct Pair
+structname is Pair. also rn field is x
+checking field x
+calling accept for j
+structtype is struct Pair
+calling get struct name on struct Pair
+calling get struct name on struct Pair
+structname is Pair. also rn field is j
+checking field x
+checking field j
+calling accept for t
+op is || and the one in list is ||. len of op is 2
+left is of type struct Pair
+fieldname is x
+structtype is struct Pair
+calling get struct name on struct Pair
+calling get struct name on struct Pair
+structname is Pair. also rn field is x
+checking field x
+left is of type struct Pair
+fieldname is j
+structtype is struct Pair
+calling get struct name on struct Pair
+calling get struct name on struct Pair
+structname is Pair. also rn field is j
+checking field x
+checking field j
+ERROR. Cannot perform operation with operand of type int: 'x'. #27
+ERROR. Cannot perform operation with operand of type int: 'j'. #27
+op:||
+lt:int
+rt:int
+left is of type struct Pair
+fieldname is x
+structtype is struct Pair
+calling get struct name on struct Pair
+calling get struct name on struct Pair
+structname is Pair. also rn field is x
+checking field x
+left is of type struct Pair
+fieldname is j
+structtype is struct Pair
+calling get struct name on struct Pair
+calling get struct name on struct Pair
+structname is Pair. also rn field is j
+checking field x
+checking field j
+ERROR. Assigning a value of type binary expr to a variable of type int: 't'. #27
+calling accept for j
+ERROR. Unknown/Undeclared variable 'j'. #28
+ERROR. Assigning a value of type int to a variable of type None: 'j'. #28
+op is + and the one in list is ||. len of op is 1
+left is of type struct Pair
+fieldname is x
+structtype is struct Pair
+calling get struct name on struct Pair
+calling get struct name on struct Pair
+structname is Pair. also rn field is x
+checking field x
+left is of type struct Pair
+fieldname is j
+structtype is struct Pair
+calling get struct name on struct Pair
+calling get struct name on struct Pair
+structname is Pair. also rn field is j
+checking field x
+checking field j
+op:+
+lt:int
+rt:int
+left is of type struct Pair
+fieldname is x
+structtype is struct Pair
+calling get struct name on struct Pair
+calling get struct name on struct Pair
+structname is Pair. also rn field is x
+checking field x
+left is of type struct Pair
+fieldname is j
+structtype is struct Pair
+calling get struct name on struct Pair
+calling get struct name on struct Pair
+structname is Pair. also rn field is j
+checking field x
+checking field j
+ERROR. Function 'add' must return a value of type 'int'. #29
+[{}, {'p': 'struct Pair', 'g': 'int', 't': 'int', 'ex': 'struct Pair', 'bb': 'bool', 'hello': 'bool'}]
+calling accept for t
+op is + and the one in list is ||. len of op is 1
+op:+
+lt:int
+rt:int
+ERROR. Assigning a value of type binary expr to a variable of type int: 't'. #34
+[{}, {'x': 'bool', 'j': 'int', 't': 'int'}]
+calling accept for myint2
+op is - and the one in list is ||. len of op is 1
+op:-
+lt:int
+rt:int
+ERROR. Assigning a value of type binary expr to a variable of type int: 'myint2'. #45
+calling accept for myint2
+op is * and the one in list is ||. len of op is 1
+op:*
+lt:int
+rt:int
+ERROR. Assigning a value of type binary expr to a variable of type int: 'myint2'. #46
+calling accept for mybool
+op is == and the one in list is ||. len of op is 2
+op:==
+lt:int
+rt:int
+ERROR. Assigning a value of type binary expr to a variable of type bool: 'mybool'. #47
+calling accept for mybool
+op is > and the one in list is ||. len of op is 1
+op:>
+lt:int
+rt:int
+ERROR. Assigning a value of type binary expr to a variable of type bool: 'mybool'. #48
+calling accept for mybool
+ERROR. Assigning a value of type unary expr to a variable of type bool: 'mybool'. #49
+calling accept for nested
+calling accept for x
+structtype is struct Pair
+calling get struct name on struct Pair
+calling get struct name on struct Pair
+structname is Pair. also rn field is x
+checking field x
+calling accept for j
+structtype is struct Pair
+calling get struct name on struct Pair
+calling get struct name on struct Pair
+structname is Pair. also rn field is j
+checking field x
+checking field j
+calling accept for ex
+calling accept for mybool
+calling accept for x
+structtype is struct Pair
+calling get struct name on struct Pair
+calling get struct name on struct Pair
+structname is Pair. also rn field is x
+checking field x
+calling accept for j
+structtype is struct Pair
+calling get struct name on struct Pair
+calling get struct name on struct Pair
+structname is Pair. also rn field is j
+checking field x
+checking field j
+calling accept for p
+structtype is struct Pair
+calling get struct name on struct Pair
+calling get struct name on struct Pair
+structname is Pair. also rn field is p
+checking field x
+checking field j
+ERROR. 'p' is not a valid field of struct type struct Pair. #59
+ERROR. Assigning a value of type struct Pair to a variable of type None: 'p'. #59
+calling accept for myint
+[{}, {'ex': 'struct Pair', 'nested': 'struct Pair', 'myint': 'int', 'myint2': 'int', 'mybool': 'bool'}]
+
+Structs
+| name    |   line |   num_fields |
+|:--------|-------:|-------------:|
+| Pair    |      5 |            2 |
+| Struct2 |      6 |            2 |
+
+Struct Fields
+| struct   | field   | type   |
+|:---------|:--------|:-------|
+| Pair     | j       | int    |
+| Pair     | x       | int    |
+| Struct2  | h       | bool   |
+| Struct2  | x       | int    |
+
+Functions
+| name   |   line | params      | ret   |
+|:-------|-------:|:------------|:------|
+| add    |     13 | struct Pair | int   |
+| main   |     39 |             | void  |
+| sub    |     32 | bool, int   | int   |
+
+Globals
+| name   |   line | type   |
+|:-------|-------:|:-------|
+| g      |      8 | int    |
+| h      |      9 | bool   |
+{'Pair': {'line': 5, 'fields': {'x': 'int', 'j': 'int'}}, 'Struct2': {'line': 6, 'fields': {'x': 'int', 'h': 'bool'}}}
+AST:
+
+Pretty print AST written to out.txt
+Structured AST JSON saved to ast.json
+Graphviz AST written to out.svg

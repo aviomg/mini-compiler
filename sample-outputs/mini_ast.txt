@@ -1,0 +1,152 @@
+Program
+ ├─ Types
+ │ └─ Struct  Pair
+ │  ├─ Decl int  x
+ │  └─ Decl int  y
+ ├─ Top Level Decls
+ │ └─ Decl int  g
+ └─ Functions
+  ├─ fun  add
+  │ ├─ Params
+  │ │ └─ Decl struct  Pair  p
+  │ ├─ Locals
+  │ │ └─ Decl int  t
+  │ ├─ Return Type
+  │ │ └─ int
+  │ └─ Body
+  │  ├─ Assign
+  │  │ ├─ Target
+  │  │ │ └─ LValueDot field= x
+  │  │ │  └─ LValueID  p
+  │  │ └─ Source
+  │  │  └─ 10
+  │  ├─ Assign
+  │  │ ├─ Target
+  │  │ │ └─ LValueID  t
+  │  │ └─ Source
+  │  │  └─ Op +
+  │  │   ├─ Dot field= x
+  │  │   │ └─ Id p
+  │  │   └─ Dot field= y
+  │  │    └─ Id p
+  │  ├─ Print endl
+  │  │ └─ Expression
+  │  │  └─ Id t
+  │  └─ Return
+  │   └─ Id t
+  └─ fun  main
+   ├─ Params
+   ├─ Locals
+   │ ├─ Decl struct  Pair  ex
+   │ ├─ Decl struct  Pair  ex2
+   │ ├─ Decl int  myint
+   │ ├─ Decl bool  mybool
+   │ ├─ Decl int  x
+   │ └─ Decl int  t
+   ├─ Return Type
+   │ └─ void
+   └─ Body
+    ├─ Assign
+    │ ├─ Target
+    │ │ └─ LValueID  ex2
+    │ └─ Source
+    │  └─ new
+    │   └─ Id Pair
+    ├─ Assign
+    │ ├─ Target
+    │ │ └─ LValueID  mybool
+    │ └─ Source
+    │  └─ false
+    ├─ Assign
+    │ ├─ Target
+    │ │ └─ LValueDot field= x
+    │ │  └─ LValueID  ex2
+    │ └─ Source
+    │  └─ 20
+    ├─ Assign
+    │ ├─ Target
+    │ │ └─ LValueDot field= y
+    │ │  └─ LValueID  ex2
+    │ └─ Source
+    │  └─ 5
+    ├─ Assign
+    │ ├─ Target
+    │ │ └─ LValueID  ex
+    │ └─ Source
+    │  └─ new
+    │   └─ Id Pair
+    ├─ Assign
+    │ ├─ Target
+    │ │ └─ LValueDot field= x
+    │ │  └─ LValueID  ex
+    │ └─ Source
+    │  └─ 10
+    ├─ Assign
+    │ ├─ Target
+    │ │ └─ LValueDot field= y
+    │ │  └─ LValueID  ex
+    │ └─ Source
+    │  └─ 2
+    ├─ Assign
+    │ ├─ Target
+    │ │ └─ LValueID  myint
+    │ └─ Source
+    │  └─ call  add
+    │   └─ Args
+    │    └─ Id ex
+    ├─ Invocation
+    │ └─ call  add
+    │  └─ Args
+    │   └─ Id ex2
+    ├─ Branch
+    │ ├─ Condition
+    │ │ └─ Op <=
+    │ │  ├─ Id myint
+    │ │  └─ 12
+    │ ├─ then-body
+    │ │ └─ Print endl
+    │ │  └─ Expression
+    │ │   └─ Id myint
+    │ └─ else-body
+    │  └─ Print endl
+    │   └─ Expression
+    │    └─ 0
+    ├─ While
+    │ ├─ Condition
+    │ │ └─ Op >=
+    │ │  ├─ Id myint
+    │ │  └─ 1
+    │ └─ Body
+    │  └─ Block
+    │   └─ Assign
+    │    ├─ Target
+    │    │ └─ LValueID  myint
+    │    └─ Source
+    │     └─ Op -
+    │      ├─ Id myint
+    │      └─ 1
+    ├─ Delete
+    │ └─ Expression
+    │  └─ Id ex
+    ├─ Assign
+    │ ├─ Target
+    │ │ └─ LValueID  x
+    │ └─ Source
+    │  └─ Op -
+    │   └─ 10
+    ├─ Branch
+    │ ├─ Condition
+    │ │ └─ Op !
+    │ │  └─ Op <
+    │ │   ├─ Id x
+    │ │   └─ 0
+    │ ├─ then-body
+    │ │ └─ Return
+    │ └─ else-body
+    │  └─ Return
+    ├─ Assign
+    │ ├─ Target
+    │ │ └─ LValueID  t
+    │ └─ Source
+    │  └─ read
+    └─ Return

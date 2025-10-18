@@ -1,0 +1,1074 @@
+{
+  "kind": "Program",
+  "line": 1,
+  "fields": {},
+  "children": [
+    {
+      "kind": "Types",
+      "line": 1,
+      "fields": {},
+      "children": [
+        {
+          "kind": "Struct (TypeDeclaration)",
+          "line": 1,
+          "fields": {
+            "name": "Pair"
+          },
+          "children": [
+            {
+              "kind": "Nested Decl",
+              "line": 1,
+              "fields": {},
+              "children": [
+                {
+                  "kind": "Decl",
+                  "line": 1,
+                  "fields": {
+                    "name": "x"
+                  },
+                  "children": [
+                    {
+                      "kind": "Int",
+                      "line": 1,
+                      "fields": {},
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "kind": "Decl",
+                  "line": 1,
+                  "fields": {
+                    "name": "y"
+                  },
+                  "children": [
+                    {
+                      "kind": "Int",
+                      "line": 1,
+                      "fields": {},
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "Declarations",
+      "line": 2,
+      "fields": {},
+      "children": [
+        {
+          "kind": "Declaration Group",
+          "line": 2,
+          "fields": {},
+          "children": [
+            {
+              "kind": "Declaration",
+              "line": 2,
+              "fields": {
+                "name": "g"
+              },
+              "children": [
+                {
+                  "kind": "Int",
+                  "line": 2,
+                  "fields": {},
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "Functions",
+      "line": 3,
+      "fields": {},
+      "children": [
+        {
+          "kind": "Function",
+          "line": 3,
+          "fields": {
+            "name": "add"
+          },
+          "children": [
+            {
+              "kind": "Parameters",
+              "line": 3,
+              "fields": {},
+              "children": [
+                {
+                  "kind": "Decl",
+                  "line": 3,
+                  "fields": {
+                    "name": "p"
+                  },
+                  "children": [
+                    {
+                      "kind": "Struct",
+                      "line": 3,
+                      "fields": {
+                        "name": "Pair"
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "kind": "ReturnType Real",
+              "line": 3,
+              "fields": {},
+              "children": [
+                {
+                  "kind": "Int",
+                  "line": 3,
+                  "fields": {},
+                  "children": []
+                }
+              ]
+            },
+            {
+              "kind": "Declarations",
+              "line": 4,
+              "fields": {},
+              "children": [
+                {
+                  "kind": "Declaration Group",
+                  "line": 4,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "Declaration",
+                      "line": 4,
+                      "fields": {
+                        "name": "t"
+                      },
+                      "children": [
+                        {
+                          "kind": "Int",
+                          "line": 4,
+                          "fields": {},
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "kind": "Statement List",
+              "line": 5,
+              "fields": {},
+              "children": [
+                {
+                  "kind": "Assignment",
+                  "line": 5,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "LValueDot",
+                      "line": 5,
+                      "fields": {
+                        "field": "x"
+                      },
+                      "children": [
+                        {
+                          "kind": "LValueId",
+                          "line": 5,
+                          "fields": {
+                            "name": "p"
+                          },
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "kind": "Integer Expr",
+                      "line": 5,
+                      "fields": {
+                        "value": "10"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "kind": "Assignment",
+                  "line": 6,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "LValueId",
+                      "line": 6,
+                      "fields": {
+                        "name": "t"
+                      },
+                      "children": []
+                    },
+                    {
+                      "kind": "Binary Expr",
+                      "line": 6,
+                      "fields": {
+                        "op": "+"
+                      },
+                      "children": [
+                        {
+                          "kind": "Dot Expr",
+                          "line": 6,
+                          "fields": {
+                            "field": "x"
+                          },
+                          "children": [
+                            {
+                              "kind": "Identifier Expr",
+                              "line": 6,
+                              "fields": {
+                                "name": "p"
+                              },
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "kind": "Dot Expr",
+                          "line": 6,
+                          "fields": {
+                            "field": "y"
+                          },
+                          "children": [
+                            {
+                              "kind": "Identifier Expr",
+                              "line": 6,
+                              "fields": {
+                                "name": "p"
+                              },
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "kind": "PrintLn",
+                  "line": 7,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "Identifier Expr",
+                      "line": 7,
+                      "fields": {
+                        "name": "t"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "kind": "Return",
+                  "line": 8,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "Identifier Expr",
+                      "line": 8,
+                      "fields": {
+                        "name": "t"
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "Function",
+          "line": 10,
+          "fields": {
+            "name": "main"
+          },
+          "children": [
+            {
+              "kind": "Parameters",
+              "line": 10,
+              "fields": {},
+              "children": []
+            },
+            {
+              "kind": "ReturnType Void",
+              "line": 10,
+              "fields": {},
+              "children": []
+            },
+            {
+              "kind": "Declarations",
+              "line": 11,
+              "fields": {},
+              "children": [
+                {
+                  "kind": "Declaration Group",
+                  "line": 11,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "Declaration",
+                      "line": 11,
+                      "fields": {
+                        "name": "ex"
+                      },
+                      "children": [
+                        {
+                          "kind": "Struct",
+                          "line": 11,
+                          "fields": {
+                            "name": "Pair"
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "kind": "Declaration Group",
+                  "line": 12,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "Declaration",
+                      "line": 12,
+                      "fields": {
+                        "name": "ex2"
+                      },
+                      "children": [
+                        {
+                          "kind": "Struct",
+                          "line": 12,
+                          "fields": {
+                            "name": "Pair"
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "kind": "Declaration Group",
+                  "line": 13,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "Declaration",
+                      "line": 13,
+                      "fields": {
+                        "name": "myint"
+                      },
+                      "children": [
+                        {
+                          "kind": "Int",
+                          "line": 13,
+                          "fields": {},
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "kind": "Declaration Group",
+                  "line": 14,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "Declaration",
+                      "line": 14,
+                      "fields": {
+                        "name": "mybool"
+                      },
+                      "children": [
+                        {
+                          "kind": "Bool",
+                          "line": 14,
+                          "fields": {},
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "kind": "Declaration Group",
+                  "line": 15,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "Declaration",
+                      "line": 15,
+                      "fields": {
+                        "name": "x"
+                      },
+                      "children": [
+                        {
+                          "kind": "Int",
+                          "line": 15,
+                          "fields": {},
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "kind": "Declaration Group",
+                  "line": 16,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "Declaration",
+                      "line": 16,
+                      "fields": {
+                        "name": "t"
+                      },
+                      "children": [
+                        {
+                          "kind": "Int",
+                          "line": 16,
+                          "fields": {},
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "kind": "Statement List",
+              "line": 17,
+              "fields": {},
+              "children": [
+                {
+                  "kind": "Assignment",
+                  "line": 17,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "LValueId",
+                      "line": 17,
+                      "fields": {
+                        "name": "ex2"
+                      },
+                      "children": []
+                    },
+                    {
+                      "kind": "New Expr",
+                      "line": 17,
+                      "fields": {
+                        "name": "Pair"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "kind": "Assignment",
+                  "line": 18,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "LValueId",
+                      "line": 18,
+                      "fields": {
+                        "name": "mybool"
+                      },
+                      "children": []
+                    },
+                    {
+                      "kind": "Boolean Expr",
+                      "line": 18,
+                      "fields": {
+                        "value": false
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "kind": "Assignment",
+                  "line": 19,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "LValueDot",
+                      "line": 19,
+                      "fields": {
+                        "field": "x"
+                      },
+                      "children": [
+                        {
+                          "kind": "LValueId",
+                          "line": 19,
+                          "fields": {
+                            "name": "ex2"
+                          },
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "kind": "Integer Expr",
+                      "line": 19,
+                      "fields": {
+                        "value": "20"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "kind": "Assignment",
+                  "line": 20,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "LValueDot",
+                      "line": 20,
+                      "fields": {
+                        "field": "y"
+                      },
+                      "children": [
+                        {
+                          "kind": "LValueId",
+                          "line": 20,
+                          "fields": {
+                            "name": "ex2"
+                          },
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "kind": "Integer Expr",
+                      "line": 20,
+                      "fields": {
+                        "value": "5"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "kind": "Assignment",
+                  "line": 21,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "LValueId",
+                      "line": 21,
+                      "fields": {
+                        "name": "ex"
+                      },
+                      "children": []
+                    },
+                    {
+                      "kind": "New Expr",
+                      "line": 21,
+                      "fields": {
+                        "name": "Pair"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "kind": "Assignment",
+                  "line": 22,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "LValueDot",
+                      "line": 22,
+                      "fields": {
+                        "field": "x"
+                      },
+                      "children": [
+                        {
+                          "kind": "LValueId",
+                          "line": 22,
+                          "fields": {
+                            "name": "ex"
+                          },
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "kind": "Integer Expr",
+                      "line": 22,
+                      "fields": {
+                        "value": "10"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "kind": "Assignment",
+                  "line": 23,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "LValueDot",
+                      "line": 23,
+                      "fields": {
+                        "field": "y"
+                      },
+                      "children": [
+                        {
+                          "kind": "LValueId",
+                          "line": 23,
+                          "fields": {
+                            "name": "ex"
+                          },
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "kind": "Integer Expr",
+                      "line": 23,
+                      "fields": {
+                        "value": "2"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "kind": "Assignment",
+                  "line": 24,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "LValueId",
+                      "line": 24,
+                      "fields": {
+                        "name": "myint"
+                      },
+                      "children": []
+                    },
+                    {
+                      "kind": "Invocation Expr",
+                      "line": 24,
+                      "fields": {
+                        "name": "add"
+                      },
+                      "children": [
+                        {
+                          "kind": "Args",
+                          "line": 24,
+                          "fields": {},
+                          "children": [
+                            {
+                              "kind": "Identifier Expr",
+                              "line": 24,
+                              "fields": {
+                                "name": "ex"
+                              },
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "kind": "Invocation",
+                  "line": 25,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "Call",
+                      "line": 25,
+                      "fields": {
+                        "name": "add"
+                      },
+                      "children": [
+                        {
+                          "kind": "Args",
+                          "line": 25,
+                          "fields": {},
+                          "children": [
+                            {
+                              "kind": "Identifier Expr",
+                              "line": 25,
+                              "fields": {
+                                "name": "ex2"
+                              },
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "kind": "Conditional",
+                  "line": 26,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "Binary Expr",
+                      "line": 26,
+                      "fields": {
+                        "op": "<="
+                      },
+                      "children": [
+                        {
+                          "kind": "Identifier Expr",
+                          "line": 26,
+                          "fields": {
+                            "name": "myint"
+                          },
+                          "children": []
+                        },
+                        {
+                          "kind": "Integer Expr",
+                          "line": 26,
+                          "fields": {
+                            "value": "12"
+                          },
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "kind": "Block",
+                      "line": 26,
+                      "fields": {},
+                      "children": [
+                        {
+                          "kind": "Statement List",
+                          "line": 27,
+                          "fields": {},
+                          "children": [
+                            {
+                              "kind": "PrintLn",
+                              "line": 27,
+                              "fields": {},
+                              "children": [
+                                {
+                                  "kind": "Identifier Expr",
+                                  "line": 27,
+                                  "fields": {
+                                    "name": "myint"
+                                  },
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "kind": "Block",
+                      "line": 29,
+                      "fields": {},
+                      "children": [
+                        {
+                          "kind": "Statement List",
+                          "line": 30,
+                          "fields": {},
+                          "children": [
+                            {
+                              "kind": "PrintLn",
+                              "line": 30,
+                              "fields": {},
+                              "children": [
+                                {
+                                  "kind": "Integer Expr",
+                                  "line": 30,
+                                  "fields": {
+                                    "value": "0"
+                                  },
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "kind": "While",
+                  "line": 32,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "Binary Expr",
+                      "line": 32,
+                      "fields": {
+                        "op": ">="
+                      },
+                      "children": [
+                        {
+                          "kind": "Identifier Expr",
+                          "line": 32,
+                          "fields": {
+                            "name": "myint"
+                          },
+                          "children": []
+                        },
+                        {
+                          "kind": "Integer Expr",
+                          "line": 32,
+                          "fields": {
+                            "value": "1"
+                          },
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "kind": "Block",
+                      "line": 32,
+                      "fields": {},
+                      "children": [
+                        {
+                          "kind": "Statement List",
+                          "line": 33,
+                          "fields": {},
+                          "children": [
+                            {
+                              "kind": "Assignment",
+                              "line": 33,
+                              "fields": {},
+                              "children": [
+                                {
+                                  "kind": "LValueId",
+                                  "line": 33,
+                                  "fields": {
+                                    "name": "myint"
+                                  },
+                                  "children": []
+                                },
+                                {
+                                  "kind": "Binary Expr",
+                                  "line": 33,
+                                  "fields": {
+                                    "op": "-"
+                                  },
+                                  "children": [
+                                    {
+                                      "kind": "Identifier Expr",
+                                      "line": 33,
+                                      "fields": {
+                                        "name": "myint"
+                                      },
+                                      "children": []
+                                    },
+                                    {
+                                      "kind": "Integer Expr",
+                                      "line": 33,
+                                      "fields": {
+                                        "value": "1"
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "kind": "Delete",
+                  "line": 35,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "Identifier Expr",
+                      "line": 35,
+                      "fields": {
+                        "name": "ex"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "kind": "Assignment",
+                  "line": 36,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "LValueId",
+                      "line": 36,
+                      "fields": {
+                        "name": "x"
+                      },
+                      "children": []
+                    },
+                    {
+                      "kind": "Unary Expr",
+                      "line": 36,
+                      "fields": {
+                        "op": "-"
+                      },
+                      "children": [
+                        {
+                          "kind": "Integer Expr",
+                          "line": 36,
+                          "fields": {
+                            "value": "10"
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "kind": "Conditional",
+                  "line": 37,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "Unary Expr",
+                      "line": 37,
+                      "fields": {
+                        "op": "!"
+                      },
+                      "children": [
+                        {
+                          "kind": "Nested Expr",
+                          "line": 37,
+                          "fields": {},
+                          "children": [
+                            {
+                              "kind": "Binary Expr",
+                              "line": 37,
+                              "fields": {
+                                "op": "<"
+                              },
+                              "children": [
+                                {
+                                  "kind": "Identifier Expr",
+                                  "line": 37,
+                                  "fields": {
+                                    "name": "x"
+                                  },
+                                  "children": []
+                                },
+                                {
+                                  "kind": "Integer Expr",
+                                  "line": 37,
+                                  "fields": {
+                                    "value": "0"
+                                  },
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "kind": "Block",
+                      "line": 37,
+                      "fields": {},
+                      "children": [
+                        {
+                          "kind": "Statement List",
+                          "line": 38,
+                          "fields": {},
+                          "children": [
+                            {
+                              "kind": "Return",
+                              "line": 38,
+                              "fields": {},
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "kind": "Block",
+                      "line": 39,
+                      "fields": {},
+                      "children": [
+                        {
+                          "kind": "Statement List",
+                          "line": 40,
+                          "fields": {},
+                          "children": [
+                            {
+                              "kind": "Return",
+                              "line": 40,
+                              "fields": {},
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "kind": "Assignment",
+                  "line": 42,
+                  "fields": {},
+                  "children": [
+                    {
+                      "kind": "LValueId",
+                      "line": 42,
+                      "fields": {
+                        "name": "t"
+                      },
+                      "children": []
+                    },
+                    {
+                      "kind": "Read",
+                      "line": 42,
+                      "fields": {},
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "kind": "Return",
+                  "line": 43,
+                  "fields": {},
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
