@@ -278,7 +278,7 @@ class ASTtoJSON(mini_ast.ASTVisitor):
 
     def visit_read_expression(self, read_expression: expression_ast.ReadExpression):
         return{
-            "node":"read",
+            "node":"Read",
             "line":self.line(read_expression)
         }
     

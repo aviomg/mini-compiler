@@ -12,11 +12,17 @@ possible TODO:
 '''
 
 from miniast import mini_ast, program_ast, type_ast, statement_ast, expression_ast, lvalue_ast
-from graphviz import Digraph
+
 import re
 import json
-import pandas as pd
-
+try:
+    import pandas as pd
+except ModuleNotFoundError:
+    print(f"Warning: pandas module was not found. Functionality dependent on it will be skipped. To install, run 'python3 -m pip install -r requirements.txt'")
+try:
+    from graphviz import Digraph
+except ModuleNotFoundError:
+    print(f"Warning: graphviz module was not found. Functionality dependent on it will be skipped. To install, run 'python3 -m pip install -r requirements.txt'")
 
 # pretty_print_ast_visitor.py
 
@@ -40,6 +46,7 @@ class PPASTVisitor(mini_ast.ASTVisitor):
         self.error_count=0
         self._last_tree = None
         self.current_fun=None
+        self.error_lines=[]
         
     def _label(self,s):
         return s if isinstance(s,str) else str(s)
@@ -122,14 +129,22 @@ class PPASTVisitor(mini_ast.ASTVisitor):
             return str(op)
      
     '''helper functions being added for milestone 1, aka semantic analysis'''
-    def report_error(self,msg,line=None):
+    def report_error(self,msg,line=None, override=False):
         ln=-1
         if line is not None:
             ln=line
-            print(f"ERROR. {msg}. #{ln}")
+            if not override:
+                #if ln not in self.error_lines:
+                    print(f"ERROR. {msg}. #{ln}")
+                    self.error_lines.append(ln)
+                    self.error_count+=1
+            else:
+                print(f"ERROR. {msg}. #{ln}")
+                self.error_lines.append(ln)
+                self.error_count+=1
         else:
             print(f"ERROR. {msg}")
-        self.error_count+=1
+            self.error_count+=1
     
     def type_to_str(self, t:type_ast.Type | type_ast.ReturnType) -> str:
         if isinstance(t,type_ast.IntType):return "int"
@@ -163,6 +178,7 @@ class PPASTVisitor(mini_ast.ASTVisitor):
         currscope=self.vars[self.current_fun]
         if varname in currscope:
             var_entry = currscope[varname]
+
             return var_entry["type"]
         else:
             g = self.globals.get(varname)
@@ -181,7 +197,7 @@ class PPASTVisitor(mini_ast.ASTVisitor):
         for f in struct["fields"]:
             if f==field:
                 flag = True
-                return struct["fields"][f]
+                return struct["fields"][f]["type"]
         if not flag:
             self.report_error(f"'{field}' is not a valid field of type {structtype}",linenum)
             return None
@@ -281,8 +297,13 @@ class PPASTVisitor(mini_ast.ASTVisitor):
                 elif op in relationalops:
                     if lt=="int" and rt=="int":
                         return "bool"
-                elif op in equalityops:
-                    if lt==rt and (lt.split()[0]=="struct" and rt.split()[0]=="struct") or (lt=="int" and rt=="int"):
+                elif op in equalityops: #lt and rt must both be int. or lt and rt must both be same type of struct. 
+                                        #or one can be struct and other can be null. 
+                    if lt==rt and lt=="int":
+                        return "bool"
+                    elif lt==rt and self.is_struct(lt):
+                        return "bool"
+                    elif (self.is_struct(lt) and rt=="null") or (self.is_struct(rt) and lt=="null"):
                         return "bool"
                 else:
                     print(f"error???")
@@ -319,12 +340,15 @@ class PPASTVisitor(mini_ast.ASTVisitor):
             self.report_error(f"Redeclaration of Struct '{name}'",td.linenum)
         line=td.linenum
         fields={}
+        fieldoffset=0
         for decl in td.fields:
             name1 = decl.name.id
             if name1 in fields:
-                self.report_error(f"Redeclaration of struct field '{name1}'",td.linenum)
-            ftype=self.type_to_str(decl.type)
-            fields[name1]=ftype
+                self.report_error(f"Redeclaration of struct field '{name1}'",decl.linenum)
+            else:
+                ftype=self.type_to_str(decl.type)
+                fields[name1]={"type":ftype,"offset":fieldoffset}
+                fieldoffset+=4
             
             if ftype.startswith("struct "):     #type of the struct field, if it is a "struct" type
                 structname=self.get_struct_name(ftype)   #the name of the struct type
@@ -339,7 +363,8 @@ class PPASTVisitor(mini_ast.ASTVisitor):
         linenum=td.linenum
         if name in self.globals:
             self.report_error(f"Redeclaration of global variable '{name}'",td.linenum)
-        self.globals[name]={"line":linenum,"type":dtype}
+        else:
+            self.globals[name]={"line":linenum,"type":dtype, "label":name}
 
     '''adds all function signatures to functions symbol table'''
     def collect_function_signature(self,td:program_ast.Function):
@@ -357,7 +382,12 @@ class PPASTVisitor(mini_ast.ASTVisitor):
                 seen.append(pname)
             params.append(self.type_to_str(p.type))
         ret = self.type_to_str(td.ret_type)
-        
+        if name=="main":
+            if ret!="int":
+                self.report_error(f"fun main must have a return type of int",td.linenum)
+            if len(params)>0:
+                self.report_error(f"fun main must not accept any arguments",td.linenum,override=True)
+    
         self.functions[name]={
             "line":linenum,
             "params":params,
@@ -399,7 +429,7 @@ class PPASTVisitor(mini_ast.ASTVisitor):
         name = declaration.name.accept(self)
         typelabel=self._getlabel(thetype)
         namelabel=self._cleanname(self._getlabel(name))
-        ret = f"Decl {typelabel}{namelabel}"       
+        ret = f"Decl {typelabel} {namelabel}"       
         return self._node(ret)
     
     def visit_type_declaration(self, type_declaration: program_ast.TypeDeclaration):
@@ -416,13 +446,13 @@ class PPASTVisitor(mini_ast.ASTVisitor):
     '''    [   {parent:"add",
             locals:  [ {name:"g",type:"int",line:3}]},...]  '''  
     def visit_function(self, function: program_ast.Function):
+        offset=0
         fname=function.name.id
         self.current_fun=fname
         sig = self.functions[fname]
         ret = sig["return"]
         name=self._cleanname(self._getlabel(function.name.accept(self)))
         self.vars[fname]={}
-        locals=[{}]
        # entry["parent"]=name
         retnode=function.ret_type.accept(self)
        # ret = self._getlabel(function.ret_type.accept(self))
@@ -438,7 +468,8 @@ class PPASTVisitor(mini_ast.ASTVisitor):
                 self.report_error(f"Duplicate function parameter names: '{pname}",function.linenum)
             else:
                 seenparams.append(pname)
-            self.vars[fname][pname]={"type":ptype,"line":p.linenum}
+            self.vars[fname][pname]={"type":ptype,"line":p.linenum,"kind":"param", "offset":offset}
+            offset+=4
   
         for p in getattr(function,"params",[]):
             params.append(p.accept(self))
@@ -452,7 +483,8 @@ class PPASTVisitor(mini_ast.ASTVisitor):
                 self.report_error(f"Parameter '{lname}' redeclared in '{fname}'", l.linenum)
             else:
                 seenlocals.append(lname)
-            self.vars[fname][lname]={"type":ltype,"line":l.linenum}
+                self.vars[fname][lname]={"type":ltype,"line":l.linenum,"kind":"local","offset":offset}
+                offset+=4
 
             
         for l in getattr(function,"locals",[]):
@@ -464,14 +496,14 @@ class PPASTVisitor(mini_ast.ASTVisitor):
         
         if not function.body:
             if ret != "void":
-                self.report_error(f"Non-void function is missing return statement: '{fname}'",sig["line"])
+                self.report_error(f"Non-void function is missing return statement: '{fname}'",last_stmt.linenum)
             return
         last_stmt = function.body[-1]
         if ret=="void":
             if isinstance(last_stmt,statement_ast.ReturnStatement):
                 self.report_error(f"Void function '{fname}' must not return a value",last_stmt.linenum)
         elif isinstance(last_stmt,statement_ast.ReturnEmptyStatement):
-                self.report_error(f"Non-void function is missing return statement of type {ret}: '{fname}'", sig["line"])
+                self.report_error(f"Non-void function is missing return statement of type {ret}: '{fname}'", last_stmt.linenum)
         elif isinstance(last_stmt,statement_ast.ReturnStatement):
             exprtype = self.type_of_expr(last_stmt.expression)
             if exprtype is None:
@@ -531,9 +563,11 @@ class PPASTVisitor(mini_ast.ASTVisitor):
         source = getattr(s,"source",[]).accept(self) #this is an EXPRESSIOn
         ttype = self.type_of_lvalue(s.target)
         stype=self.type_of_expr(s.source)
-        #print(f"target: {ttype}. source: {stype}. #{s.linenum} ")
         if ttype is not None and stype is not None: #if one was None, error would have alr been sent, inside type_of_expr
-            if ttype != stype:
+            if self.is_struct(ttype):
+                if ttype!=stype and stype!="null":
+                    self.report_error(f"Invalid assignment: type '{stype}' assigned to variable of type {ttype}: '{s.target.id.id}'",s.linenum)
+            elif ttype != stype:
                 self.report_error(f"Invalid assignment: type '{stype}' assigned to variable of type {ttype}: '{s.target.id.id}'",s.linenum)
         return self._node("Assign",
                           self._node("Target",target),
@@ -562,7 +596,7 @@ class PPASTVisitor(mini_ast.ASTVisitor):
                 elseblocksmts.append(s.accept(self)) 
         else:
             elseblocksmts=None    
-        return self._node(f"Branch",self._node("Condition",name),self._node("then-body",thenblockstmts),self._node("else-body",elseblocksmts))
+        return self._node(f"Branch",self._node("Condition",name),self._node("(Block) then-body",thenblockstmts),self._node("(Block) else-body",elseblocksmts))
 
     def visit_while_statement(self, while_statement: statement_ast.WhileStatement):
         gtype = self.type_of_expr(while_statement.guard)
@@ -690,7 +724,7 @@ class PPASTVisitor(mini_ast.ASTVisitor):
         op=self._op_to_text(unary_expression.operator)
         operand=unary_expression.operand.accept(self)
         return self._node(f"Op {op}",operand)
-
+   
     def visit_binary_expression(self, e: expression_ast.BinaryExpression):
        # print(f"on linenum {e.linenum}")
         '''it is possible that i will do the type_of_expr calls and stuff in other places. so if i have time i should come back and
@@ -708,22 +742,25 @@ class PPASTVisitor(mini_ast.ASTVisitor):
         
         if lt is not None and rt is not None: #if either was not defined, type_of_expr() would have already reported the error
             if op in arithops or op in relationalops:
-                if lt != "int":
+                if lt != "int" :
                     self.report_error(f"Cannot perform operation '{op}' with operand of type {lt}",e.linenum)
-                if rt != "int":
+                elif rt != "int" :
                     self.report_error(f"Cannot perform operation '{op}' with operand of type {rt}",e.linenum)
-            if op in booleanops:
+            elif op in booleanops:
                  if lt != "bool":
                     self.report_error(f"Cannot perform operation '{op}' with operand of type {lt}",e.linenum)
-                 if rt != "bool":
+                 if rt != "bool" :
                     self.report_error(f"Cannot perform operation '{op}' with operand of type {rt}",e.linenum)
-            if op in equalityops:
-                if lt != rt:
-                    self.report_error(f"Cannot perform operation '{op}' with mismatching types: '{lt}' and '{rt}'",e.linenum)
-                elif lt==rt:
+            elif op in equalityops:
+                if lt==rt:
                     words=lt.split()
                     if words[0]!="struct" and lt!="int":
                         self.report_error(f"Cannot perform equality operation with type {lt}",e.linenum)
+                #if they are equal, they must both be struct. or both be int. covered. if not equal, only time its allowed is if one is a struct
+                else:
+                    if not ((self.is_struct(lt) and rt=="null") or (self.is_struct(rt) and lt=="null")):
+                        self.report_error(f"Cannot perform operation '{op}' with mismatching types: '{lt}' and '{rt}'",e.linenum)
+                
       
         l=left.accept(self)
         r=right.accept(self)
@@ -852,52 +889,66 @@ class PPASTVisitor(mini_ast.ASTVisitor):
             return next(iter(v)) if v else None
         return v
     
+    def get_symbol_table_vals(self):
+        return self.structs,self.functions,self.globals,self.vars
+    
     def convert_to_dataframe(self):
-        structsdf=pd.DataFrame(
-            [{"name":n,"line":v["line"],"num_fields":len(v["fields"])} for n,v in self.structs.items()]
-        ).sort_values(["name"]).reset_index(drop=True)
+        structsdf = None
+        df_struct_fields = None 
+        df_funcs=None 
+        df_globals=None
+        df_locals = None
+        if self.structs:
+            structsdf=pd.DataFrame(
+                [{"name":n,"line":v["line"],"num_fields":len(v["fields"])} for n,v in self.structs.items()]
+            ).sort_values(["name"]).reset_index(drop=True)
         
-        df_struct_fields = pd.DataFrame(
-            [{"struct": n, "field": fname, "type": ftype}
-             for n, v in self.structs.items()
-             for fname, ftype in v["fields"].items()]
-        ).sort_values(["struct", "field"]).reset_index(drop=True)
-
-        df_funcs = pd.DataFrame(
-            [{"name": n, "line": v["line"],
-              "params": ", ".join(v["params"]), "ret": v["return"]}
-             for n, v in self.functions.items()]
-        ).sort_values(["name"]).reset_index(drop=True)
-
-        df_globals = pd.DataFrame(
-            [{"name": n, "line": v["line"], "type": v["type"]}
-             for n, v in self.globals.items()]
-        ).sort_values(["name"]).reset_index(drop=True)
+            df_struct_fields = pd.DataFrame(
+                
+                
+                [{"struct": n, "field": fname, "type": ftype["type"],"offset":ftype["offset"]}
+                for n, v in self.structs.items()
+                for fname, ftype in v["fields"].items()]
+            ).sort_values(["struct", "field"]).reset_index(drop=True)
+        if self.functions:
+            df_funcs = pd.DataFrame(
+                [{"name": n, "line": v["line"],
+                "params": ", ".join(v["params"]), "ret": v["return"]}
+                for n, v in self.functions.items()]
+            ).sort_values(["name"]).reset_index(drop=True)
+        if self.globals:
+            df_globals = pd.DataFrame(
+                [{"name": n, "line": v["line"], "type": v["type"], "label":v["label"]}
+                for n, v in self.globals.items()]
+            ).sort_values(["name"]).reset_index(drop=True)
         
-        rows = []
-        for fun, table in self.vars.items():
-            for name, meta in table.items():
-                rows.append({
-                    "function": fun,
-                    "name": name,
-                    "type": meta.get("type"),
-                    "kind": meta.get("kind", ""),
-                    "line": meta.get("line"),
-                })
-        df_locals = pd.DataFrame(rows, columns=["function", "name", "type", "kind", "line"])
-        if not df_locals.empty:
-            df_locals = df_locals.sort_values(["function", "name"]).reset_index(drop=True)
+        if self.vars:
+            rows = []
+            for fun, table in self.vars.items():
+                for name, meta in table.items():
+                    rows.append({
+                        "function": fun,
+                        "name": name,
+                        "type": meta.get("type"),
+                        "kind": meta.get("kind", ""),
+                        "line": meta.get("line"),
+                        "offset":meta.get("offset"),
+                    })
+            df_locals = pd.DataFrame(rows, columns=["function", "name", "type", "kind", "line","offset"])
+            if not df_locals.empty:
+                df_locals = df_locals.sort_values(["function", "name"]).reset_index(drop=True)
 
         return structsdf, df_struct_fields, df_funcs, df_globals,df_locals
 
     def print_tables(self):
         titles=["Structs","Struct Fields","Functions","Globals","Locals"]
         for title, df in zip(titles,self.convert_to_dataframe()):
-            print(f"\n{title}")
-            if df.empty:print("(none)")
-            else:
-               # print(df.to_string(index=False))  
-                print(df.to_markdown(index=False))  # needs tabulate >=0.8.7
+            if df is not None:
+                print(f"\n{title}")
+                if df.empty:print("(none)")
+                else:
+                # print(df.to_string(index=False))  
+                    print(df.to_markdown(index=False))  # needs tabulate >=0.8.7
         print("\n")
 
    

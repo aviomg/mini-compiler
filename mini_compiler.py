@@ -4,12 +4,15 @@ import sys
 from antlr4 import *
 from MiniLexer import MiniLexer
 from MiniParser import MiniParser
+from ir.instruction_sel import InstructionSelector
 from mini_ast_visitor import MiniToASTVisitor
 from pretty_print_ast_visitor import PPASTVisitor
 from parse_tree_to_json import PTtoJSON
+from ir.codegen import CodeGenerator
 import json
 import argparse
 from ast_to_json import ASTtoJSON
+from ir.regalloc import RegisterAllocation
 
 
 
@@ -29,6 +32,8 @@ def main(argv):
     stream = CommonTokenStream(lexer)   # buffer tokens so the parser can look ahead efficiently
     parser = MiniParser(stream)         # create a parser for the stream of tokens
     program_ctx = parser.program()      # recursively parse, starting with the top-level 'program' construct of Mini.g4. returns a parse-tree node
+    
+    #print(input_stream)
     
     if args.generate_parse_tree:
             filename="out.json"
@@ -74,6 +79,21 @@ def main(argv):
                 json.dump(astjson,f,indent=2)
             print(f"Structured AST JSON saved to {outfile}")
         
+        structs,funcs,glbls,variables=pp_visitor.get_symbol_table_vals()
+        if pp_visitor.error_count!=0:
+            print(f"Assembly file not generated due to syntax errors.")
+            return
+            
+        
+            #instruction_selector = InstructionSelector(ASTJSON="ast.json",structs=structs,funcs=funcs,glbls=glbls,variables=variables,filename=args.mini_file)
+        codegen=CodeGenerator(structs,funcs,glbls,variables,filename=args.mini_file)
+        mini_ast.accept(codegen)
+        codegen.write_file()
+        op_file=codegen.output_file
+        regalloc=RegisterAllocation(op_file)
+        regalloc.run()
+        
+            
        # if args.sem_analysis:
        #     collector = SemanticAnalyzer()
        #     collector.visit_program(mini_ast)
@@ -90,9 +110,9 @@ def main(argv):
                 print("Graphviz AST written to "+ outfile+".svg")
             except Exception as e:
                 print("error rendering graphviz. please check if it is properly installed:", e) 
-        with open("output.json","w") as f:
-            data = pp_visitor.render_json(mini_ast)
-            json.dump(data,f,indent=4)
+        #with open("output.json","w") as f:
+        #    data = pp_visitor.render_json(mini_ast)
+        #    json.dump(data,f,indent=4)
 if __name__ == '__main__':
     main(sys.argv)
 
