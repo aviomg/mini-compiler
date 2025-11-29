@@ -32,7 +32,7 @@ def main(argv):
     parser = MiniParser(stream)         # create a parser for the stream of tokens
     program_ctx = parser.program()      # recursively parse, starting with the top-level 'program' construct of Mini.g4. returns a parse-tree node
     
-    #print(input_stream)
+    print(input_stream)
     
     if args.generate_parse_tree:
             filename="out.json"
