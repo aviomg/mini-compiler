@@ -4,7 +4,6 @@ import sys
 from antlr4 import *
 from MiniLexer import MiniLexer
 from MiniParser import MiniParser
-from ir.instruction_sel import InstructionSelector
 from mini_ast_visitor import MiniToASTVisitor
 from pretty_print_ast_visitor import PPASTVisitor
 from parse_tree_to_json import PTtoJSON
