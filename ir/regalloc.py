@@ -773,7 +773,8 @@ class RegisterAllocation():
             inst.inst=newtokens
         print(f"fixed instructions for proc {proc.name}:")
         for inst in proc.body_inst:
-                print(f"{(" ").join(inst.inst)}")
+                line=" ".join(inst.inst)
+                print(line)
 
         '''
             if inst.rd is not None and inst.rd in assign:
