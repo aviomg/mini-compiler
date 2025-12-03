@@ -3,7 +3,6 @@ read_err1:
     jal print_str
     li a0 1
     jal exit
-
 cmd_err2:
     la a0 error_string2
     jal print_str

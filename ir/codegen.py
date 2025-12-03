@@ -23,7 +23,7 @@ class CodeGenerator(mini_ast.ASTVisitor):
         self.em=Emitter()
         self.frames={}
         self.struct_layouts={}
-        self.output_file=filename.split(".")[0] + ".s"
+        self.output_file=filename.split(".")[0] + "first-pass" ".s"
         self.oplines=[]
         self.globals_map = self.globalsFrame.globals_map
         self.frame=None         #the Frame object for the currently active frame
@@ -66,13 +66,13 @@ class CodeGenerator(mini_ast.ASTVisitor):
              fname=self.frame.fname
              ans=self.vars[fname][struct_name]["type"]
              ans=ans.split(" ")[1]
-             print(f"type is {ans}")
+         #(f"type is {ans}")
              return ans
          else:
              ans=self.globals_map[struct_name]["Type"]
              if len(ans.split(" "))>1:
                  ans=ans.split(" ")[1]
-             print(f"type is {ans}")
+         #    print(f"type is {ans}")
              return ans
 
     def op_to_text(self, op):
@@ -113,7 +113,8 @@ class CodeGenerator(mini_ast.ASTVisitor):
     
     def emit_postreturn_new(self):
         num_to_decrement=4 #...say that it is 20, bc 5 locals *4=20
-        self.em.emit(f"lw ra 0(sp) #start of postreturn")
+        self.em.emit(f"#start of postreturn")
+        self.em.emit(f"lw ra 0(sp) ")
         self.em.emit(f"addi sp sp {num_to_decrement}")
 
     
@@ -159,6 +160,8 @@ class CodeGenerator(mini_ast.ASTVisitor):
             self.em.emit(f"addi sp sp {sp_offset}")
             for var in self.frame.local_offset:
                 self.em.emit(f"sw zero {self.frame.local_offset[var]}(sp) #this holds var {var}")
+            self.em.emit(f"#start of body")
+
             for s in function.body:
                 s.accept(self)
             self.em.emit(f"addi a0 zero 0")
@@ -168,9 +171,10 @@ class CodeGenerator(mini_ast.ASTVisitor):
             return
         else:
             #prologue
-            print(f"adding prologue for {fname}")
+       #     print(f"adding prologue for {fname}")
             numtooffset=52+(4*self.frame.num_locals)
-            self.em.emit(f"addi sp sp -{numtooffset} #start of prologue") #-64
+            self.em.emit("#start of prologue")
+            self.em.emit(f"addi sp sp -{numtooffset} ") #-64
             for var in self.frame.local_offset:
                 self.em.emit(f"sw zero {self.frame.local_offset[var]}(sp) #this holds var {var}") #0,4,8
             #next one, aka ra, will be at numlocals*4. cuz if there were 4 locals, they were placed at 0, 4,8,12. next is 4*4=16
@@ -183,8 +187,6 @@ class CodeGenerator(mini_ast.ASTVisitor):
             #currently, sp is at -64. 60(sp) holds s12. 12(sp) holds ra
             for p in function.params:
                 pname=p.name.id
-                print(f"name of param is {p.name.id}")
-                print(f"kind of the var in frame ST is {self.frame.kinds[p.name.id]}")
             for i in range(0,len(function.params)):
                 param=function.params[i]
                 pname=param.name.id
@@ -192,7 +194,7 @@ class CodeGenerator(mini_ast.ASTVisitor):
                 offset_to_store_param=self.frame.local_offset[pname]
                 #self.em.emit(f"addi {reg_to_store_param} a{i} 0")
                 self.em.emit(f"sw a{i} {offset_to_store_param}(sp) #storing param at offset instead of in reg")
-            
+            self.em.emit(f"#end of prologue")
             '''
             1. decrement sp by 13*4=52
             2. save ra. sw ra 0(sp)
@@ -207,18 +209,21 @@ class CodeGenerator(mini_ast.ASTVisitor):
                 then, for i in range (0,len(params)): addi {params_local_reg} a{i} 0...moving the params from a-registers to their assigned ones
             '''
             #body:
+            self.em.emit(f"#start of body")
             for i in range(0,len(function.body)-1):
                 s=function.body[i]
                 s.accept(self)
+            self.em.emit(f"#end of body")
             
             #epilogue:
                 #return stmt:
+            self.em.emit(f"#start of epilogue")
             num_stmts=len(function.body)
             ret_stmt=function.body[num_stmts-1]
             ret_reg=ret_stmt.accept(self) #wait, i think the storing of a0 in the LHS of assignment statement w invocation will be done
             #automatically, since i account for it in visit_return_statement and visit_invocation_expression
             destroy_locals_offset=self.frame.num_locals*4
-            self.em.emit(f"addi sp sp {destroy_locals_offset} #epilogue (started when ret was stored in a0)")
+            self.em.emit(f"addi sp sp {destroy_locals_offset}")
             self.em.emit(f"lw ra 0(sp)")
             ctr=4
             for i in range(0,12):
@@ -227,7 +232,7 @@ class CodeGenerator(mini_ast.ASTVisitor):
             self.em.emit(f"addi sp sp 52")
             self.em.emit("ret")
             self.proc_label_counter+=1
-            
+            self.em.emit(f"#end of epilogue")
             #epilogue
             '''
             1. the return_statement/expression thingy's accept method will return the register where return val is stored. so, 
@@ -275,7 +280,7 @@ class CodeGenerator(mini_ast.ASTVisitor):
         rhs_reg=source.accept(self)
         if isinstance(target,lvalue_ast.LValueID):
             tname=s.target.id.id
-            print(f"target is lvalueid: name={tname}")
+            #print(f"target is lvalueid: name={tname}")
             if tname not in self.frame.register_map and tname in self.globals_map:    #not in the local map. if it is in the local map, we default to referencing the local var's namespace
                 self.store_global(name=tname,reg=rhs_reg)
             else:
@@ -357,18 +362,15 @@ class CodeGenerator(mini_ast.ASTVisitor):
         eval_reg=while_statement.guard.accept(self)
         newlines=len(self.em.lines) 
         guard_lines=self.restore_emitter_lines(currlines,newlines)
-        print(f"guard lines:")
-        for l in guard_lines:
-            print(l)
         currlines=len(self.em.lines)
         whileblock=while_statement.body
         for stmt in whileblock.statements:
             stmt.accept(self)
         newlines=len(self.em.lines)
         whileblock_lines=self.restore_emitter_lines(currlines,newlines)
-        print(f"block lines")
-        for l2 in whileblock_lines:
-            print(l2)
+    #    print(f"block lines")
+    #    for l2 in whileblock_lines:
+    #        print(l2)
         self.em.while_block(eval_reg,guard_lines,whileblock_lines)
         pass
 
@@ -383,7 +385,7 @@ class CodeGenerator(mini_ast.ASTVisitor):
         return None
 
     def visit_invocation_statement(self, invocation_statement: statement_ast.InvocationStatement):
-        print(f"in visit invocation stmt for {self.frame.fname}: {invocation_statement.expression.name.id}")
+      #  print(f"in visit invocation stmt for {self.frame.fname}: {invocation_statement.expression.name.id}")
         expr=invocation_statement.expression
         expr.accept(self)
         #eg sub(x,y)
@@ -424,9 +426,9 @@ class CodeGenerator(mini_ast.ASTVisitor):
     def visit_return_statement(self, return_statement: statement_ast.ReturnStatement):
         fname=self.frame.fname
         if fname!="main":
-            print(f"calling visit return statement for {return_statement.expression}")
+       #    print(f"calling visit return statement for {return_statement.expression}")
             expr_reg=return_statement.expression.accept(self)
-            print(f"expr reg is {expr_reg}")
+       #     print(f"expr reg is {expr_reg}")
             self.em.emit(f"addi a0 {expr_reg} 0")
             return "a0"
         elif fname=="main":
@@ -449,7 +451,7 @@ the value that we load in, is the address/pointer stored for 'coords'. return th
         if isinstance(expr,expression_ast.DotExpression) or isinstance(expr,lvalue_ast.LValueDot):
             left=expr.left  #left=q.coords .........  now q
             name=expr.id.id #right=x    ............  now coords
-            print(f"in compute, found dot expr: left={left} and name={name}")
+         #   print(f"in compute, found dot expr: left={left} and name={name}")
             left_base_addr,left_type=self.compute_dot_expr_addr(left) #gives us reg storing base address of {left}. and struct type of {left}
             left_stlayout=self.struct_layouts[left_type]
             field_offset=left_stlayout.field_offsets[name]  #offset of field {right} for struct {left}
@@ -465,7 +467,7 @@ the value that we load in, is the address/pointer stored for 'coords'. return th
             return curr1,field_type
  
         elif isinstance(expr,expression_ast.IdentifierExpression):   #now q.
-                print(f"in compute, found identifier expr: {expr.id}")
+            #    print(f"in compute, found identifier expr: {expr.id}")
                 #we know the name of the struct variable. if we know what register holds q, we have the base pointer. so find that out
                 #we know the type of the struct. if we know what offset the {name} is placed at, we can add that to the base pointer. so find that out
                 base_name=expr.id
@@ -484,7 +486,7 @@ the value that we load in, is the address/pointer stored for 'coords'. return th
             
         elif isinstance(expr,lvalue_ast.LValueID):
             base_name=expr.id.id
-            print(f"in compute, found lvalue id expr: {base_name}")
+        #    print(f"in compute, found lvalue id expr: {base_name}")
             base_type=self.get_struct_type(base_name)
             base_reg=None
             if self.is_var_local(base_name):
@@ -502,7 +504,7 @@ the value that we load in, is the address/pointer stored for 'coords'. return th
     def visit_dot_expression(self, expr: expression_ast.DotExpression):    #q.coords.x    
         left = expr.left    #q.coords
         name = expr.id.id   #q.x
-        print(f"entered visit_dot_expression for left={left} and name={name}. \n")
+   #     print(f"entered visit_dot_expression for left={left} and name={name}. \n")
         base_ptr,base_type=self.compute_dot_expr_addr(expr.left)   #for q.coords.x, this would return reg holding pointer to base of 'coords'??
         #base_ptr: register that holds value x, where x=the base pointer to the struct that has {name} as a field. 
                                                 # aka in q.coords.x, x=base ptr to the instance of 'coords'. numerical value of address where this
@@ -531,7 +533,7 @@ the value that we load in, is the address/pointer stored for 'coords'. return th
 
     def visit_identifier_expression(self, expr: expression_ast.IdentifierExpression):
         curr=self.frame.new_temp()
-        print(f"in identifier expression for {expr.id}. rn next temp is {curr}")
+    #    print(f"in identifier expression for {expr.id}. rn next temp is {curr}")
         srcid=expr.id
         if srcid in self.frame.register_map:
             srcreg = self.frame.register_map[srcid]
@@ -584,7 +586,7 @@ the value that we load in, is the address/pointer stored for 'coords'. return th
         args=expr.arguments
         arguments=[]
         for arg in args:
-            print(f"calling accept for {arg}")
+        #   print(f"calling accept for {arg}")
             arguments.append(arg.accept(self))  #for each arg, the reg where it is stored is in arguments[] list
         for i in range(0,len(arguments)):
             arg_reg=arguments[i] #eg t20
@@ -721,7 +723,7 @@ the value that we load in, is the address/pointer stored for 'coords'. return th
     def visit_lvalue_dot(self, lv: lvalue_ast.LValueDot):
         left=lv.left
         name=lv.id.id
-        print(f"visiting lvalue dot: left={left} and name={name}")
+    #    print(f"visiting lvalue dot: left={left} and name={name}")
         base_ptr,base_type=self.compute_dot_expr_addr(left) #gives us reg storing base address of {left}. and struct type of {left}
         stlayout=self.struct_layouts[base_type]
         field_offset=stlayout.field_offsets[name]
@@ -733,7 +735,7 @@ the value that we load in, is the address/pointer stored for 'coords'. return th
 
     def visit_lvalue_id(self, lvalue_id: lvalue_ast.LValueID):
         name=lvalue_id.id
-        print(f"visiting lvalue id. name is {name}")
+   #     print(f"visiting lvalue id. name is {name}")
         pass
     
     
@@ -768,5 +770,6 @@ the value that we load in, is the address/pointer stored for 'coords'. return th
                 lines=cont.split("\n")
                 for l in lines:
                     f.write(l + "\n")
+        return setuplines
 
     

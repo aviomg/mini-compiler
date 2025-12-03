@@ -32,7 +32,7 @@ def main(argv):
     parser = MiniParser(stream)         # create a parser for the stream of tokens
     program_ctx = parser.program()      # recursively parse, starting with the top-level 'program' construct of Mini.g4. returns a parse-tree node
     
-    print(input_stream)
+    #print(input_stream)
     
     if args.generate_parse_tree:
             filename="out.json"
@@ -87,9 +87,9 @@ def main(argv):
             #instruction_selector = InstructionSelector(ASTJSON="ast.json",structs=structs,funcs=funcs,glbls=glbls,variables=variables,filename=args.mini_file)
         codegen=CodeGenerator(structs,funcs,glbls,variables,filename=args.mini_file)
         mini_ast.accept(codegen)
-        codegen.write_file()
+        setuplines=codegen.write_file()
         op_file=codegen.output_file
-        regalloc=RegisterAllocation(op_file)
+        regalloc=RegisterAllocation(op_file,setuplines,filename=args.mini_file)
         regalloc.run()
         
             
