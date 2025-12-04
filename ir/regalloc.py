@@ -764,6 +764,7 @@ class RegisterAllocation():
             newtokens=[]
             for tok in inst.inst:
                 if tok is None:
+                    newtokens.append("x0")
                     continue
                 if tok in assign:
                     newtokens.append(assign[tok])
@@ -879,7 +880,8 @@ class RegisterAllocation():
                         if inst_idx < len(block.instructions):
                             inst = block.instructions[inst_idx]
                             inst_idx += 1
-                            out.write(" ".join(inst.inst) + "\n")
+                            sanitized=[tok if tok is not None else "x0" for tok in inst.inst]
+                            out.write(" ".join(sanitized) + "\n")
                         else:
                             # fallback: keep the original line if we somehow run out
                             out.write(line + "\n")

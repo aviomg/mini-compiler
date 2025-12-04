@@ -162,12 +162,7 @@ class CodeGenerator(mini_ast.ASTVisitor):
         self.frame=self.frames[fname]
         self.em.emit(f"{fname}:")
         if fname=="main":
-            #add the standard code for reading in the filepath given as a command line argument:
-            if self.read_needed:
-                with open(STORE_INPUT_PATH_PATH,"r") as f:
-                    cont=f.read()
-                    for line in cont.split("\n"):
-                        self.em.emit(line)
+            inserted_store_input=False
             sp_offset=self.frame.num_locals*4*-1
             self.em.emit(f"addi sp sp {sp_offset}")
             for var in self.frame.local_offset:
@@ -179,6 +174,13 @@ class CodeGenerator(mini_ast.ASTVisitor):
             self.em.emit(f"addi a0 zero 0")
             self.em.emit(f"jal zero exit")
             self.frame=None
+            # If we discovered read() during codegen, inject argv/filepath setup at the top of main
+            if self.read_needed and not inserted_store_input:
+                with open(STORE_INPUT_PATH_PATH,"r") as f:
+                    cont=f.read()
+                    store_lines=cont.split("\n")
+                # insert after the label
+                self.em.lines=self.em.lines[:1] + store_lines + self.em.lines[1:]
             proc_ir=self._build_procedure_ir(fname,self.em.lines)
             self.if_counter=self.em.if_block_label_counter
             self.loop_counter=self.em.loop_label_counter

@@ -91,6 +91,13 @@ B5:
 #end of epilogue
 main:
 #start of body
+addi x5 x0 2      # check for correct number of command line arguments
+bne x10 x5 cmd_err2
+ 
+B6:
+lw x10 4(x11)         # load the filepath 
+la x11 filepath_ptr  # load address of filepath home location 
+sw x10 0(x11)         # save the filepath to its home location
 addi x2 x2 -12
 sw x0 0(x2) #this holds var ex
 sw x0 4(x2) #this holds var r
@@ -107,19 +114,19 @@ li x13 12
 slt x9 x12 x13
 beq x9 x0 endWhile0
  
-B6:
+B7:
 lw x10 filepath_ptr #start of precall
 addi x2 x2 -4
 sw x1 0(x2)
 jal x1 read_int
  
-B7:
+B8:
 #start of postreturn
 lw x1 0(x2) 
 addi x2 x2 4
 bne x11 x0 read_err1
  
-B8:
+B9:
 sw x10 8(x2) #placing local's value in stack rather than reg
 lw x15 8(x2)
 li x16 4
@@ -127,25 +134,25 @@ slt x14 x16 x15
 ifBlockStart2:
 beqz x14 else2
  
-B9:
+B10:
 li x14 0x0
 jal x0 endIfBlock2
  
-B10:
+B11:
 else2:
 li x14 0x1
 endIfBlock2:
 ifBlockStart3:
 beq x14 x0 else3
  
-B11:
+B12:
 if3:
 lw x18 4(x2)
 addi x17 x18 200
 sw x17 4(x2) #placing local's value in stack rather than reg
 jal x0 endIfBlock3
  
-B12:
+B13:
 else3:
 lw x20 4(x2)
 addi x19 x20 100
@@ -155,40 +162,40 @@ lw x21 4(x2)
 addi x10 x21 0
 jal print_int
  
-B13:
+B14:
 li x10 0x0A
 jal print_char
  
-B14:
+B15:
 lw x23 0(x2)
 addi x22 x23 1
 sw x22 0(x2) #placing local's value in stack rather than reg
 j whileStart0
  
-B15:
+B16:
 endWhile0:
 addi x10 x0 0
 jal x0 exit
  
-B16:
+B17:
 #end of body
 read_err1:
     la x10 error_string1
     jal print_str
  
-B17:
+B18:
     li x10 1
     jal exit
  
-B18:
+B19:
 cmd_err2:
     la x10 error_string2
     jal print_str
  
-B19:
+B20:
     li x10 1
     jal exit
  
-B20:
+B21:
 
 

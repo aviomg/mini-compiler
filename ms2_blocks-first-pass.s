@@ -79,6 +79,11 @@ ret
 #end of epilogue
 main:
 #start of body
+addi t0 zero 2      # check for correct number of command line arguments
+bne a0 t0 cmd_err2
+lw a0 4(a1)         # load the filepath 
+la a1 filepath_ptr  # load address of filepath home location 
+sw a0 0(a1)         # save the filepath to its home location
 addi sp sp -12
 sw zero 0(sp) #this holds var ex
 sw zero 4(sp) #this holds var r
