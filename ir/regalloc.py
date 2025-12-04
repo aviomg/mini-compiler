@@ -745,7 +745,7 @@ class RegisterAllocation():
         
         for inst in proc.body_inst:
             def remap(reg):
-                if reg is None:
+                if reg is None or reg=="None":
                     return "x0"
                 return assign.get(reg,reg)
             
@@ -763,7 +763,7 @@ class RegisterAllocation():
             
             newtokens=[]
             for tok in inst.inst:
-                if tok is None:
+                if tok is None or tok=="None":
                     newtokens.append("x0")
                     continue
                 if tok in assign:
@@ -880,7 +880,12 @@ class RegisterAllocation():
                         if inst_idx < len(block.instructions):
                             inst = block.instructions[inst_idx]
                             inst_idx += 1
-                            sanitized=[tok if tok is not None else "x0" for tok in inst.inst]
+                            sanitized=[]
+                            for tok in inst.inst:
+                                if tok is None or tok=="None":
+                                    sanitized.append("x0")
+                                else:
+                                    sanitized.append(tok)
                             out.write(" ".join(sanitized) + "\n")
                         else:
                             # fallback: keep the original line if we somehow run out

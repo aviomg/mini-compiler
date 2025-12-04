@@ -68,18 +68,19 @@ class CodeGenerator(mini_ast.ASTVisitor):
             return True
 
     def get_struct_type(self,struct_name):
-         if self.is_var_local(struct_name):
-             fname=self.frame.fname
-             ans=self.vars[fname][struct_name]["type"]
-             ans=ans.split(" ")[1]
-         #(f"type is {ans}")
-             return ans
-         else:
-             ans=self.globals_map[struct_name]["Type"]
-             if len(ans.split(" "))>1:
+         try:
+             if self.is_var_local(struct_name):
+                 fname=self.frame.fname
+                 ans=self.vars[fname][struct_name]["type"]
                  ans=ans.split(" ")[1]
-         #    print(f"type is {ans}")
-             return ans
+                 return ans
+             else:
+                 ans=self.globals_map[struct_name]["Type"]
+                 if len(ans.split(" "))>1:
+                     ans=ans.split(" ")[1]
+                 return ans
+         except Exception:
+             return None
 
     def op_to_text(self, op):
         try:
@@ -306,6 +307,8 @@ class CodeGenerator(mini_ast.ASTVisitor):
         target=s.target
         source=s.source
         rhs_reg=source.accept(self)
+        if rhs_reg is None:
+            rhs_reg="zero"
         if isinstance(target,lvalue_ast.LValueID):
             tname=s.target.id.id
             #print(f"target is lvalueid: name={tname}")
@@ -352,6 +355,8 @@ class CodeGenerator(mini_ast.ASTVisitor):
 
     def visit_conditional_statement(self, conditional_statement: statement_ast.ConditionalStatement):
         evaluated_condition_reg = conditional_statement.guard.accept(self) #name will store the register that holds the value of the evaluated expression
+        if evaluated_condition_reg is None:
+            evaluated_condition_reg="zero"
         #so i guess Rd[eval_cond_reg] will either be zero or one?? wait this makes this so much easier
         #all we have to do is check whether it is one or zero. "beq {eval_cond_reg} zero cont"...if it evaluated to zero aka false, then
         #we go to cont. if it was one, we can enter the if-
@@ -388,6 +393,8 @@ class CodeGenerator(mini_ast.ASTVisitor):
     def visit_while_statement(self, while_statement: statement_ast.WhileStatement):
         currlines=len(self.em.lines)
         eval_reg=while_statement.guard.accept(self)
+        if eval_reg is None:
+            eval_reg="zero"
         newlines=len(self.em.lines) 
         guard_lines=self.restore_emitter_lines(currlines,newlines)
         currlines=len(self.em.lines)
@@ -456,7 +463,8 @@ class CodeGenerator(mini_ast.ASTVisitor):
         if fname!="main":
        #    print(f"calling visit return statement for {return_statement.expression}")
             expr_reg=return_statement.expression.accept(self)
-       #     print(f"expr reg is {expr_reg}")
+            if expr_reg is None:
+                expr_reg="zero"
             self.em.emit(f"addi a0 {expr_reg} 0")
             return "a0"
         elif fname=="main":
@@ -481,6 +489,10 @@ the value that we load in, is the address/pointer stored for 'coords'. return th
             name=expr.id.id #right=x    ............  now coords
          #   print(f"in compute, found dot expr: left={left} and name={name}")
             left_base_addr,left_type=self.compute_dot_expr_addr(left) #gives us reg storing base address of {left}. and struct type of {left}
+            if left_base_addr is None:
+                left_base_addr="zero"
+            if left_type is None or left_type not in self.struct_layouts:
+                return left_base_addr,None
             left_stlayout=self.struct_layouts[left_type]
             field_offset=left_stlayout.field_offsets[name]  #offset of field {right} for struct {left}
             field_type=left_stlayout.field_types[name]
@@ -500,6 +512,8 @@ the value that we load in, is the address/pointer stored for 'coords'. return th
                 #we know the type of the struct. if we know what offset the {name} is placed at, we can add that to the base pointer. so find that out
                 base_name=expr.id
                 base_type=self.get_struct_type(base_name)
+                if base_type is None:
+                    return "zero",None
                 base_reg=None
                
                 if self.is_var_local(base_name):
@@ -516,6 +530,8 @@ the value that we load in, is the address/pointer stored for 'coords'. return th
             base_name=expr.id.id
         #    print(f"in compute, found lvalue id expr: {base_name}")
             base_type=self.get_struct_type(base_name)
+            if base_type is None:
+                return "zero",None
             base_reg=None
             if self.is_var_local(base_name):
                 base_reg=self.frame.new_temp()
@@ -577,6 +593,9 @@ the value that we load in, is the address/pointer stored for 'coords'. return th
         elif srcid in self.globals_map:
             globalreg=self.load_global(srcid)   #returns reg where global was loaded. in this case setting x=g where g is a global
             return globalreg
+        # fallback to zero if unknown identifier
+        self.em.emit(f"li {curr} 0")
+        return curr
 
 
     def visit_new_expression(self, expr: expression_ast.NewExpression):
@@ -616,7 +635,10 @@ the value that we load in, is the address/pointer stored for 'coords'. return th
         arguments=[]
         for arg in args:
         #   print(f"calling accept for {arg}")
-            arguments.append(arg.accept(self))  #for each arg, the reg where it is stored is in arguments[] list
+            regval=arg.accept(self)
+            if regval is None:
+                regval="zero"
+            arguments.append(regval)  #for each arg, the reg where it is stored is in arguments[] list
         extras=max(0,len(arguments)-8)
         # push extras (args 8+) onto stack in reverse order so arg8 is closest to sp
         for i in range(len(arguments)-1,7,-1):
@@ -655,6 +677,8 @@ the value that we load in, is the address/pointer stored for 'coords'. return th
     def visit_unary_expression(self, expr: expression_ast.UnaryExpression):
         op=expr.operator.value
         operand_reg=expr.operand.accept(self)    #returns the register where operand is stored. if operand was just a value/variable, visit_identifier_expression takes care of this
+        if operand_reg is None:
+            operand_reg="zero"
         curr=self.frame.new_temp()
         if op=="-":
             self.em.emit(f"sub {curr} zero {operand_reg}")
@@ -694,8 +718,8 @@ the value that we load in, is the address/pointer stored for 'coords'. return th
 
         if op in binaryops:
             if op=="-" or op=="*": #no logic with immediates is necessary here. bc sub and mul don't have i-type counterparts
-                leftreg=expr.left.accept(self)
-                rightreg=expr.right.accept(self)
+                leftreg=expr.left.accept(self) or "zero"
+                rightreg=expr.right.accept(self) or "zero"
                 ans=f"{binaryops[op]} {tcurr} {leftreg} {rightreg}"
                 self.em.emit(ans)
                 return tcurr
@@ -705,24 +729,24 @@ the value that we load in, is the address/pointer stored for 'coords'. return th
             #left imm yes, right imm yes...wouldnt happen
             else:
                 if leftimm is None and rightimm is not None:
-                    leftreg=expr.left.accept(self)
+                    leftreg=expr.left.accept(self) or "zero"
                     ans=f"{binaryops[op]}i {tcurr} {leftreg} {rightimm}"
                     self.em.emit(ans)
                     return tcurr
                 elif rightimm is None and leftimm is not None:
-                    rightreg=expr.right.accept(self)
+                    rightreg=expr.right.accept(self) or "zero"
                     ans=f"{binaryops[op]}i {tcurr} {rightreg} {leftimm}"
                     self.em.emit(ans)
                     return tcurr
                 elif rightimm is None and leftimm is None:
-                    leftreg=expr.left.accept(self)
-                    rightreg=expr.right.accept(self)
+                    leftreg=expr.left.accept(self) or "zero"
+                    rightreg=expr.right.accept(self) or "zero"
                     ans=f"{binaryops[op]} {tcurr} {leftreg} {rightreg}"
                     self.em.emit(ans)
                     return tcurr     
         else:
-            leftreg=expr.left.accept(self)
-            rightreg=expr.right.accept(self)
+            leftreg=expr.left.accept(self) or "zero"
+            rightreg=expr.right.accept(self) or "zero"
             if op=="/":
                 self.em.emit(f"li {tcurr} 0x0")    #the quotient, aka the ans
                 while_block_lines=[]
