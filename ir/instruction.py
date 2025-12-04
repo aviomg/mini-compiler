@@ -109,9 +109,13 @@ class Instruction():
                     self.label=self.inst[2]
                 else:
                     self.rd=self.inst[1]
-                    p2=self.inst[2].split("(") #p2[0] is "imm" and p2[1] is "rs1)"
-                    self.rs1=p2[1][:-1]
-                    self.imm=p2[0]
+                    if "(" in self.inst[2]:
+                        p2=self.inst[2].split("(") #p2[0] is "imm" and p2[1] is "rs1)"
+                        self.rs1=p2[1][:-1]
+                        self.imm=p2[0]
+                    else:
+                        # handle label loads like "lw a0 filepath_ptr"
+                        self.label=self.inst[2]
             elif self.op in STORE_OPS:
                 self.type=InstType.STORE
                 self.rd="Mem"

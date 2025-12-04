@@ -561,6 +561,8 @@ class RegisterAllocation():
         for reg in reg_used:
             firstuse=first_dict[reg]
             lastuse=last_dict[reg]
+            if firstuse is None or lastuse is None:
+                continue
             ranges[reg]=(firstuse,lastuse)
         return ranges                                
         #for each inst, 
@@ -674,6 +676,8 @@ class RegisterAllocation():
                 call_site_indexes.append(i.index_in_proc)
         for r in register_ranges:
             interval=register_ranges[r]
+            if interval is None or interval[0] is None or interval[1] is None:
+                continue
             for c in call_site_indexes:
                 if interval[0] < c and interval[1]>c:
                     call_live_regs.append(r)

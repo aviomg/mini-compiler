@@ -121,13 +121,6 @@ B2:
 #end of epilogue
 main:
 #start of body
-addi s11 x0 2      # check for correct number of command line arguments
-bne x10 s11 cmd_err2
- 
-B3:
-lw x10 4(x11)         # load the filepath 
-la x11 filepath_ptr  # load address of filepath home location 
-sw x10 0(x11)         # save the filepath to its home location
 addi x2 x2 -24
 sw x0 0(x2) #this holds var ex
 sw x0 4(x2) #this holds var r
@@ -138,7 +131,7 @@ sw x0 20(x2) #this holds var p
 li x10 8
 jal malloc
  
-B4:
+B3:
 sw x10 20(x2) #placing local's value in stack rather than reg
 li s11 75
 lw s10 20(x2)
@@ -160,7 +153,7 @@ addi x2 x2 -4
 sw x1 0(x2)
 jal sub
  
-B5:
+B4:
 #start of postreturn
 lw x1 0(x2) 
 addi x2 x2 4
@@ -169,18 +162,18 @@ lw s10 4(x2)
 addi x10 s10 0
 jal print_int
  
-B6:
+B5:
 li x10 0x0A
 jal print_char
  
-B7:
+B6:
 lw s10 20(x2)
 addi x10 s10 0x0 #start of precall
 addi x2 x2 -4
 sw x1 0(x2)
 jal addxy
  
-B8:
+B7:
 #start of postreturn
 lw x1 0(x2) 
 addi x2 x2 4
@@ -190,11 +183,11 @@ lw s10 0(s10)
 addi x10 s10 0
 jal print_int
  
-B9:
+B8:
 li x10 0x0A
 jal print_char
  
-B10:
+B9:
 li s10 10
 sw s10 0(x2) #placing local's value in stack rather than reg
 lw s10 4(x2)
@@ -209,34 +202,34 @@ li s9 0x0
 whileStart0:
 blt s11 s10 endWhile0
  
-B11:
+B10:
 sub s11 s11 s10
 addi s9 s9 0x1
 j whileStart0
  
-B12:
+B11:
 endWhile0:
 sw s9 16(x2) #placing local's value in stack rather than reg
 lw s9 16(x2)
 addi x10 s9 0
 jal print_int
  
-B13:
+B12:
 li x10 0x0A
 jal print_char
  
-B14:
+B13:
 lw s9 4(x2)
 lw s10 0(x2)
 slt s10 s10 s9
 ifBlockStart0:
 beqz s10 else0
  
-B15:
+B14:
 li s10 0x0
 jal x0 endIfBlock0
  
-B16:
+B15:
 else0:
 li s10 0x1
 endIfBlock0:
@@ -248,7 +241,7 @@ addi x2 x2 -4
 sw x1 0(x2)
 jal addxy
  
-B17:
+B16:
 #start of postreturn
 lw x1 0(x2) 
 addi x2 x2 4
@@ -257,26 +250,26 @@ sw s9 0(x2) #placing local's value in stack rather than reg
 addi x10 x0 0
 jal x0 exit
  
-B18:
+B17:
 #end of body
 read_err1:
     la x10 error_string1
     jal print_str
  
-B19:
+B18:
     li x10 1
     jal exit
  
-B20:
+B19:
 cmd_err2:
     la x10 error_string2
     jal print_str
  
-B21:
+B20:
     li x10 1
     jal exit
  
-B22:
+B21:
 
 
 

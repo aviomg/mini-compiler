@@ -31,6 +31,9 @@ class CodeGenerator(mini_ast.ASTVisitor):
         self.frame=None         #the Frame object for the currently active frame
         self._label_n  = 0
         self.proc_label_counter=0
+        self.if_counter=0
+        self.loop_counter=0
+        self.read_needed=False
         self.module=None
         
         for f in self.funcs:
@@ -152,15 +155,19 @@ class CodeGenerator(mini_ast.ASTVisitor):
 
     def visit_function(self, function: program_ast.Function):
         self.em=Emitter()
+        # carry label counters across procedures so labels stay globally unique
+        self.em.if_block_label_counter=self.if_counter
+        self.em.loop_label_counter=self.loop_counter
         fname=function.name.id
         self.frame=self.frames[fname]
         self.em.emit(f"{fname}:")
         if fname=="main":
             #add the standard code for reading in the filepath given as a command line argument:
-            with open(STORE_INPUT_PATH_PATH,"r") as f:
-                cont=f.read()
-                for line in cont.split("\n"):
-                    self.em.emit(line)
+            if self.read_needed:
+                with open(STORE_INPUT_PATH_PATH,"r") as f:
+                    cont=f.read()
+                    for line in cont.split("\n"):
+                        self.em.emit(line)
             sp_offset=self.frame.num_locals*4*-1
             self.em.emit(f"addi sp sp {sp_offset}")
             for var in self.frame.local_offset:
@@ -173,6 +180,8 @@ class CodeGenerator(mini_ast.ASTVisitor):
             self.em.emit(f"jal zero exit")
             self.frame=None
             proc_ir=self._build_procedure_ir(fname,self.em.lines)
+            self.if_counter=self.em.if_block_label_counter
+            self.loop_counter=self.em.loop_label_counter
             return proc_ir
         else:
             #prologue
@@ -255,8 +264,12 @@ class CodeGenerator(mini_ast.ASTVisitor):
 
             self.frame=None
             proc_ir=self._build_procedure_ir(fname,self.em.lines)
+            self.if_counter=self.em.if_block_label_counter
+            self.loop_counter=self.em.loop_label_counter
             return proc_ir
         proc_ir=self._build_procedure_ir(fname,self.em.lines)
+        self.if_counter=self.em.if_block_label_counter
+        self.loop_counter=self.em.loop_label_counter
         return proc_ir
 
 
@@ -574,6 +587,7 @@ the value that we load in, is the address/pointer stored for 'coords'. return th
         return curr
 
     def visit_read_expression(self, expr: expression_ast.ReadExpression):
+        self.read_needed=True
         self.em.emit(f"lw a0 filepath_ptr #start of precall")
         self.emit_precall_new()
         self.em.emit("jal ra read_int")
