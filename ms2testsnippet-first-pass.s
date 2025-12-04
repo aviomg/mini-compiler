@@ -31,7 +31,6 @@ sw s9 52(sp)
 sw s10 56(sp)
 sw s11 60(sp)
 sw a0 0(sp) #storing param at offset instead of in reg
-sw a1 4(sp) #storing param at offset instead of in reg
 #end of prologue
 #start of body
 lw x6 0(sp)
@@ -144,7 +143,6 @@ addi a1 x16 0x0
 addi sp sp -4
 sw ra 0(sp)
 jal sub
-#start of postreturn
 lw ra 0(sp) 
 addi sp sp 4
 sw a0 4(sp) #placing local's value in stack rather than reg
@@ -158,7 +156,6 @@ addi a0 x18 0x0 #start of precall
 addi sp sp -4
 sw ra 0(sp)
 jal addxy
-#start of postreturn
 lw ra 0(sp) 
 addi sp sp 4
 lw x19 20(sp)
@@ -208,7 +205,6 @@ addi a0 x36 0x0 #start of precall
 addi sp sp -4
 sw ra 0(sp)
 jal addxy
-#start of postreturn
 lw ra 0(sp) 
 addi sp sp 4
 add x34 x35 a0

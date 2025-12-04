@@ -201,13 +201,18 @@ class CodeGenerator(mini_ast.ASTVisitor):
             #currently, sp is at -64. 60(sp) holds s12. 12(sp) holds ra
             for p in function.params:
                 pname=p.name.id
-            for i in range(0,len(function.params)):
-                param=function.params[i]
-                pname=param.name.id
-                reg_to_store_param=self.frame.register_map[pname]
-                offset_to_store_param=self.frame.local_offset[pname]
-                #self.em.emit(f"addi {reg_to_store_param} a{i} 0")
+        for i in range(0,len(function.params)):
+            param=function.params[i]
+            pname=param.name.id
+            reg_to_store_param=self.frame.register_map[pname]
+            offset_to_store_param=self.frame.local_offset[pname]
+            if i<8:
                 self.em.emit(f"sw a{i} {offset_to_store_param}(sp) #storing param at offset instead of in reg")
+            else:
+                extra_offset=(52+(4*self.frame.num_locals)) + 4*(i-7)
+                tmp=self.frame.new_temp()
+                self.em.emit(f"lw {tmp} {extra_offset}(sp) #load stack arg {i}")
+                self.em.emit(f"sw {tmp} {offset_to_store_param}(sp) #store stack arg {i}")
             self.em.emit(f"#end of prologue")
             '''
             1. decrement sp by 13*4=52
@@ -610,19 +615,30 @@ the value that we load in, is the address/pointer stored for 'coords'. return th
         for arg in args:
         #   print(f"calling accept for {arg}")
             arguments.append(arg.accept(self))  #for each arg, the reg where it is stored is in arguments[] list
-        for i in range(0,len(arguments)):
-            arg_reg=arguments[i] #eg t20
-            if i==0:
-                line=f"addi a{i} {arg_reg} 0x0 #start of precall"
-            else:
-                line=f"addi a{i} {arg_reg} 0x0"
-            self.em.emit(line)
+        extras=max(0,len(arguments)-8)
+        # push extras (args 8+) onto stack in reverse order so arg8 is closest to sp
+        for i in range(len(arguments)-1,7,-1):
+            arg_reg=arguments[i]
+            self.em.emit(f"addi sp sp -4")
+            self.em.emit(f"sw {arg_reg} 0(sp)")
+        # place first 8 args in a0-a7
+        upto=min(8,len(arguments))
+        for i in range(upto):
+            arg_reg=arguments[i]
+            prefix="#start of precall" if i==0 else ""
+            self.em.emit(f"addi a{i} {arg_reg} 0x0 {prefix}".strip())
         callee=expr.name.id
         num_to_decrement=self.frame.num_locals*4 #...say that it is 20, bc 5 locals *4=20
         num_to_decrement=num_to_decrement+4 #bc saving ra...so now 24
-        self.emit_precall_new()
+        # save ra
+        self.em.emit(f"addi sp sp -4")
+        self.em.emit(f"sw ra 0(sp)")
         self.em.emit(f"jal {callee}")
-        self.emit_postreturn_new()
+        # restore ra and pop extras
+        self.em.emit(f"lw ra 0(sp) ")
+        self.em.emit(f"addi sp sp 4")
+        if extras>0:
+            self.em.emit(f"addi sp sp {extras*4}")
         self.proc_label_counter+=1
         return "a0" #return val will be saved in a0. if it was an invocation_statement, it doesnt rlly matter
         #

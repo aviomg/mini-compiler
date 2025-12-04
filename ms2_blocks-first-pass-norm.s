@@ -95,17 +95,17 @@ addi x2 x2 -12
 sw x0 0(x2) #this holds var ex
 sw x0 4(x2) #this holds var r
 sw x0 8(x2) #this holds var readnum
-li s11 10
-sw s11 0(x2) #placing local's value in stack rather than reg
-li s11 5
-lw s10 0(x2)
-mul s10 s11 s10
-sw s10 4(x2) #placing local's value in stack rather than reg
+li x5 10
+sw x5 0(x2) #placing local's value in stack rather than reg
+li x7 5
+lw x8 0(x2)
+mul x6 x7 x8
+sw x6 4(x2) #placing local's value in stack rather than reg
 whileStart0:
-lw s10 0(x2)
-li s11 12
-slt s11 s10 s11
-beq s11 x0 endWhile0
+lw x12 0(x2)
+li x13 12
+slt x9 x12 x13
+beq x9 x0 endWhile0
  
 B6:
 lw x10 filepath_ptr #start of precall
@@ -121,38 +121,38 @@ bne x11 x0 read_err1
  
 B8:
 sw x10 8(x2) #placing local's value in stack rather than reg
-lw s11 8(x2)
-li s10 4
-slt s10 s10 s11
+lw x15 8(x2)
+li x16 4
+slt x14 x16 x15
 ifBlockStart2:
-beqz s10 else2
+beqz x14 else2
  
 B9:
-li s10 0x0
+li x14 0x0
 jal x0 endIfBlock2
  
 B10:
 else2:
-li s10 0x1
+li x14 0x1
 endIfBlock2:
 ifBlockStart3:
-beq s10 x0 else3
+beq x14 x0 else3
  
 B11:
 if3:
-lw s10 4(x2)
-addi s10 s10 200
-sw s10 4(x2) #placing local's value in stack rather than reg
+lw x18 4(x2)
+addi x17 x18 200
+sw x17 4(x2) #placing local's value in stack rather than reg
 jal x0 endIfBlock3
  
 B12:
 else3:
-lw s10 4(x2)
-addi s10 s10 100
-sw s10 4(x2) #placing local's value in stack rather than reg
+lw x20 4(x2)
+addi x19 x20 100
+sw x19 4(x2) #placing local's value in stack rather than reg
 endIfBlock3:
-lw s10 4(x2)
-addi x10 s10 0
+lw x21 4(x2)
+addi x10 x21 0
 jal print_int
  
 B13:
@@ -160,9 +160,9 @@ li x10 0x0A
 jal print_char
  
 B14:
-lw s10 0(x2)
-addi s10 s10 1
-sw s10 0(x2) #placing local's value in stack rather than reg
+lw x23 0(x2)
+addi x22 x23 1
+sw x22 0(x2) #placing local's value in stack rather than reg
 j whileStart0
  
 B15:
@@ -190,6 +190,5 @@ B19:
     jal exit
  
 B20:
-
 
 

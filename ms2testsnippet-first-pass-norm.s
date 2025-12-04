@@ -33,7 +33,6 @@ sw x25 52(x2)
 sw x26 56(x2)
 sw x27 60(x2)
 sw x10 0(x2) #storing param at offset instead of in reg
-sw x11 4(x2) #storing param at offset instead of in reg
 #end of prologue
 #start of body
 lw x6 0(x2)
@@ -154,7 +153,6 @@ sw x1 0(x2)
 jal sub
  
 B4:
-#start of postreturn
 lw x1 0(x2) 
 addi x2 x2 4
 sw x10 4(x2) #placing local's value in stack rather than reg
@@ -174,7 +172,6 @@ sw x1 0(x2)
 jal addxy
  
 B7:
-#start of postreturn
 lw x1 0(x2) 
 addi x2 x2 4
 lw x19 20(x2)
@@ -242,7 +239,6 @@ sw x1 0(x2)
 jal addxy
  
 B16:
-#start of postreturn
 lw x1 0(x2) 
 addi x2 x2 4
 add x34 x35 x10

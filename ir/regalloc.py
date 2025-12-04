@@ -746,7 +746,7 @@ class RegisterAllocation():
         for inst in proc.body_inst:
             def remap(reg):
                 if reg is None:
-                    return None
+                    return "x0"
                 return assign.get(reg,reg)
             
             if inst.rd is not None:
@@ -763,6 +763,8 @@ class RegisterAllocation():
             
             newtokens=[]
             for tok in inst.inst:
+                if tok is None:
+                    continue
                 if tok in assign:
                     newtokens.append(assign[tok])
                     continue
