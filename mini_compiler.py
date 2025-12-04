@@ -7,11 +7,12 @@ from MiniParser import MiniParser
 from mini_ast_visitor import MiniToASTVisitor
 from pretty_print_ast_visitor import PPASTVisitor
 from parse_tree_to_json import PTtoJSON
-from ir.codegen import CodeGenerator
+from ir.codegen import CodeGenerator, END_PROCS_PATH
 import json
 import argparse
 from ast_to_json import ASTtoJSON
 from ir.regalloc import RegisterAllocation
+from ir.ir_module import write_module
 
 
 
@@ -86,9 +87,11 @@ def main(argv):
         
             #instruction_selector = InstructionSelector(ASTJSON="ast.json",structs=structs,funcs=funcs,glbls=glbls,variables=variables,filename=args.mini_file)
         codegen=CodeGenerator(structs,funcs,glbls,variables,filename=args.mini_file)
-        mini_ast.accept(codegen)
-        setuplines=codegen.write_file()
+        module_ir=mini_ast.accept(codegen)
+        if module_ir is None:
+            module_ir=codegen.module
         op_file=codegen.output_file
+        setuplines=write_module(module_ir, op_file, END_PROCS_PATH)
         regalloc=RegisterAllocation(op_file,setuplines,filename=args.mini_file)
         regalloc.run()
         
@@ -114,5 +117,3 @@ def main(argv):
         #    json.dump(data,f,indent=4)
 if __name__ == '__main__':
     main(sys.argv)
-
-

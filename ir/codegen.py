@@ -1,6 +1,7 @@
 from miniast import mini_ast, program_ast, type_ast, statement_ast, expression_ast, lvalue_ast
 from ir.helpers import GlobalsFrame,Frame,StructLayout
 from ir.emitter import Emitter
+from ir.ir_module import ModuleIR, FunctionIR, ProcedureIR, write_module
 
 #next: implement printing and reading to make it easier to test everything
 #then, try nested function calls
@@ -20,15 +21,17 @@ class CodeGenerator(mini_ast.ASTVisitor):
         self.globals=glbls 
         self.vars=variables
         self.globalsFrame=GlobalsFrame(self.structs,self.globals)
-        self.em=Emitter()
+        self.em=None
         self.frames={}
         self.struct_layouts={}
-        self.output_file=filename.split(".")[0] + "first-pass" ".s"
+        filestem=filename.split(".")[0]
+        self.output_file=f"{filestem}-first-pass.s"
         self.oplines=[]
         self.globals_map = self.globalsFrame.globals_map
         self.frame=None         #the Frame object for the currently active frame
         self._label_n  = 0
         self.proc_label_counter=0
+        self.module=None
         
         for f in self.funcs:
             frame=Frame(variables=self.vars,fname=f)
@@ -131,15 +134,16 @@ class CodeGenerator(mini_ast.ASTVisitor):
 
         
     def visit_program(self, program: program_ast.Program):
-        #for d in program.declarations:
-        #    d.accept(self)
-        
+        self.module=ModuleIR(setup_lines=self.setup_file())
         for f in program.functions:
             if f.name.id!="main":
-                f.accept(self)
+                proc_ir=f.accept(self)
+                self._attach_procedure(proc_ir)
         for f in program.functions:
             if f.name.id=="main":
-                f.accept(self)
+                proc_ir=f.accept(self)
+                self._attach_procedure(proc_ir)
+        return self.module
                 
     def visit_declaration(self, decl: program_ast.Declaration):
         pass
@@ -147,6 +151,7 @@ class CodeGenerator(mini_ast.ASTVisitor):
         pass
 
     def visit_function(self, function: program_ast.Function):
+        self.em=Emitter()
         fname=function.name.id
         self.frame=self.frames[fname]
         self.em.emit(f"{fname}:")
@@ -167,8 +172,8 @@ class CodeGenerator(mini_ast.ASTVisitor):
             self.em.emit(f"addi a0 zero 0")
             self.em.emit(f"jal zero exit")
             self.frame=None
-           # self.em.emit("\n")
-            return
+            proc_ir=self._build_procedure_ir(fname,self.em.lines)
+            return proc_ir
         else:
             #prologue
        #     print(f"adding prologue for {fname}")
@@ -249,7 +254,10 @@ class CodeGenerator(mini_ast.ASTVisitor):
             '''
 
             self.frame=None
-          #  self.em.emit("\n")
+            proc_ir=self._build_procedure_ir(fname,self.em.lines)
+            return proc_ir
+        proc_ir=self._build_procedure_ir(fname,self.em.lines)
+        return proc_ir
 
 
     def visit_type(self, type_: type_ast.Type):
@@ -758,18 +766,49 @@ the value that we load in, is the address/pointer stored for 'coords'. return th
 
             
     def write_file(self):
+        if self.module is None:
+            raise ValueError("No module IR has been generated yet.")
         print(f"writing to file {self.output_file}")
-        setuplines=self.setup_file()
-        with open(self.output_file,"w") as f:
-            for line in setuplines:
-                f.write(line + "\n")
-            for l in self.em.lines:
-                f.write(l + "\n")
-            with open(END_PROCS_PATH,"r") as f2:
-                cont=f2.read()
-                lines=cont.split("\n")
-                for l in lines:
-                    f.write(l + "\n")
-        return setuplines
+        return write_module(self.module, self.output_file, END_PROCS_PATH)
 
-    
+    def _build_procedure_ir(self,fname,lines):
+        label = lines[0] if lines and lines[0].endswith(":") else f"{fname}:"
+        prologue=[]
+        body=[]
+        epilogue=[]
+        section=body
+        body_started=True
+        remaining_lines=lines[1:] if lines and lines[0]==label else lines
+        for line in remaining_lines:
+            stripped=line.strip()
+            if stripped.startswith("#start of prologue"):
+                section=prologue
+                body_started=False
+                continue
+            if stripped.startswith("#start of body"):
+                section=body
+                body_started=True
+                continue
+            if stripped.startswith("#start of epilogue"):
+                section=epilogue
+                continue
+            if stripped.startswith("#end of"):
+                continue
+            if not body_started:
+                prologue.append(line)
+                continue
+            section.append(line)
+        return ProcedureIR(name=fname,label=label,prologue=prologue,body=body,epilogue=epilogue)
+
+    def _attach_procedure(self,proc_ir:ProcedureIR):
+        if self.module is None:
+            self.module=ModuleIR(setup_lines=self.setup_file())
+        existing=None
+        for fn in self.module.functions:
+            if fn.name==proc_ir.name:
+                existing=fn
+                break
+        if existing is None:
+            existing=FunctionIR(name=proc_ir.name)
+            self.module.functions.append(existing)
+        existing.procedures.append(proc_ir)

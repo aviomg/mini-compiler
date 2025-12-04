@@ -870,9 +870,13 @@ class RegisterAllocation():
 
                     # If this line is an instruction (op in OPS), replace with updated inst.inst
                     if op in OPS and not stripped.endswith(":"):
-                        inst = block.instructions[inst_idx]
-                        inst_idx += 1
-                        out.write(" ".join(inst.inst) + "\n")
+                        if inst_idx < len(block.instructions):
+                            inst = block.instructions[inst_idx]
+                            inst_idx += 1
+                            out.write(" ".join(inst.inst) + "\n")
+                        else:
+                            # fallback: keep the original line if we somehow run out
+                            out.write(line + "\n")
                     else:
                         # labels, directives, comments, markers like #start of body etc.
                         out.write(line + "\n")         
@@ -913,7 +917,7 @@ class RegisterAllocation():
         
         for obj in self.procObjects:
             self.linear_scan(obj)
-        self.write_final_asm(self.output_filename)
+        self.write_final_asm2(self.output_filename)
         
         
           

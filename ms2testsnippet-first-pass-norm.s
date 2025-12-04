@@ -36,10 +36,10 @@ sw x10 0(x2) #storing param at offset instead of in reg
 sw x11 4(x2) #storing param at offset instead of in reg
 #end of prologue
 #start of body
-lw s11 0(x2)
-lw s10 4(x2)
-sub s10 s11 s10
-sw s10 8(x2) #placing local's value in stack rather than reg
+lw x6 0(x2)
+lw x7 4(x2)
+sub x5 x6 x7
+sw x5 8(x2) #placing local's value in stack rather than reg
 #end of body
 #start of epilogue
 lw x8 8(x2)
@@ -84,18 +84,18 @@ sw x27 56(x2)
 sw x10 0(x2) #storing param at offset instead of in reg
 #end of prologue
 #start of body
-lw s11 0(x2)
-addi s11 s11 0
-lw s11 0(s11)
-lw s10 0(x2)
-addi s10 s10 4
-lw s10 0(s10)
-add s10 s11 s10
-sw s10 4(x2) #placing local's value in stack rather than reg
-lw s10 4(x2)
-lw s11 0(x2)
-addi s11 s11 0
-sw s10 0(s11)
+lw x6 0(x2)
+addi x7 x6 0
+lw x7 0(x7)
+lw x8 0(x2)
+addi x9 x8 4
+lw x9 0(x9)
+add x5 x7 x9
+sw x5 4(x2) #placing local's value in stack rather than reg
+lw x12 4(x2)
+lw x13 0(x2)
+addi x14 x13 0
+sw x12 0(x14)
 #end of body
 #start of epilogue
 lw x15 4(x2)
@@ -121,8 +121,8 @@ B2:
 #end of epilogue
 main:
 #start of body
-addi s11 x0 2      # check for correct number of command line arguments
-bne x10 s11 cmd_err2
+addi x5 x0 2      # check for correct number of command line arguments
+bne x10 x5 cmd_err2
  
 B3:
 lw x10 4(x11)         # load the filepath 
@@ -140,22 +140,22 @@ jal malloc
  
 B4:
 sw x10 20(x2) #placing local's value in stack rather than reg
-li s11 75
-lw s10 20(x2)
-addi s10 s10 4
-sw s11 0(s10)
-li s10 25
-lw s11 20(x2)
-addi s11 s11 0
-sw s10 0(s11)
-lw s11 20(x2)
-addi s11 s11 0
-lw s11 0(s11)
-lw s10 20(x2)
-addi s10 s10 4
-lw s10 0(s10)
-addi x10 s11 0x0 #start of precall
-addi x11 s10 0x0
+li x5 75
+lw x6 20(x2)
+addi x7 x6 4
+sw x5 0(x7)
+li x8 25
+lw x9 20(x2)
+addi x12 x9 0
+sw x8 0(x12)
+lw x13 20(x2)
+addi x14 x13 0
+lw x14 0(x14)
+lw x15 20(x2)
+addi x16 x15 4
+lw x16 0(x16)
+addi x10 x14 0x0 #start of precall
+addi x11 x16 0x0
 addi x2 x2 -4
 sw x1 0(x2)
 jal sub
@@ -165,8 +165,8 @@ B5:
 lw x1 0(x2) 
 addi x2 x2 4
 sw x10 4(x2) #placing local's value in stack rather than reg
-lw s10 4(x2)
-addi x10 s10 0
+lw x17 4(x2)
+addi x10 x17 0
 jal print_int
  
 B6:
@@ -174,8 +174,8 @@ li x10 0x0A
 jal print_char
  
 B7:
-lw s10 20(x2)
-addi x10 s10 0x0 #start of precall
+lw x18 20(x2)
+addi x10 x18 0x0 #start of precall
 addi x2 x2 -4
 sw x1 0(x2)
 jal addxy
@@ -184,10 +184,10 @@ B8:
 #start of postreturn
 lw x1 0(x2) 
 addi x2 x2 4
-lw s10 20(x2)
-addi s10 s10 0
-lw s10 0(s10)
-addi x10 s10 0
+lw x19 20(x2)
+addi x20 x19 0
+lw x20 0(x20)
+addi x10 x20 0
 jal print_int
  
 B9:
@@ -195,30 +195,30 @@ li x10 0x0A
 jal print_char
  
 B10:
-li s10 10
-sw s10 0(x2) #placing local's value in stack rather than reg
-lw s10 4(x2)
-sub s10 x0 s10
-sw s10 4(x2) #placing local's value in stack rather than reg
-lw s10 4(x2)
-addi s10 s10 2
-li s11 3
-mul s11 s10 s11
-lw s10 0(x2)
-li s9 0x0
+li x21 10
+sw x21 0(x2) #placing local's value in stack rather than reg
+lw x22 4(x2)
+sub x23 x0 x22
+sw x23 4(x2) #placing local's value in stack rather than reg
+lw x27 4(x2)
+addi x26 x27 2
+li x28 3
+mul x25 x26 x28
+lw x29 0(x2)
+li x24 0x0
 whileStart0:
-blt s11 s10 endWhile0
+blt x25 x29 endWhile0
  
 B11:
-sub s11 s11 s10
-addi s9 s9 0x1
+sub x25 x25 x29
+addi x24 x24 0x1
 j whileStart0
  
 B12:
 endWhile0:
-sw s9 16(x2) #placing local's value in stack rather than reg
-lw s9 16(x2)
-addi x10 s9 0
+sw x24 16(x2) #placing local's value in stack rather than reg
+lw x30 16(x2)
+addi x10 x30 0
 jal print_int
  
 B13:
@@ -226,24 +226,24 @@ li x10 0x0A
 jal print_char
  
 B14:
-lw s9 4(x2)
-lw s10 0(x2)
-slt s10 s10 s9
+lw x32 4(x2)
+lw x33 0(x2)
+slt x31 x33 x32
 ifBlockStart0:
-beqz s10 else0
+beqz x31 else0
  
 B15:
-li s10 0x0
+li x31 0x0
 jal x0 endIfBlock0
  
 B16:
 else0:
-li s10 0x1
+li x31 0x1
 endIfBlock0:
-sw s10 8(x2) #placing local's value in stack rather than reg
-lw s10 4(x2)
-lw s9 20(x2)
-addi x10 s9 0x0 #start of precall
+sw x31 8(x2) #placing local's value in stack rather than reg
+lw x35 4(x2)
+lw x36 20(x2)
+addi x10 x36 0x0 #start of precall
 addi x2 x2 -4
 sw x1 0(x2)
 jal addxy
@@ -252,8 +252,8 @@ B17:
 #start of postreturn
 lw x1 0(x2) 
 addi x2 x2 4
-add s9 s10 x10
-sw s9 0(x2) #placing local's value in stack rather than reg
+add x34 x35 x10
+sw x34 0(x2) #placing local's value in stack rather than reg
 addi x10 x0 0
 jal x0 exit
  
@@ -277,6 +277,5 @@ B21:
     jal exit
  
 B22:
-
 
 
