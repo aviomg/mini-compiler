@@ -1,0 +1,729 @@
+{
+    "label": "Program",
+    "children": [
+        {
+            "label": "Types",
+            "children": [
+                {
+                    "label": "Struct A",
+                    "children": [
+                        {
+                            "label": "Decl inti",
+                            "children": []
+                        },
+                        {
+                            "label": "Decl intj1",
+                            "children": []
+                        },
+                        {
+                            "label": "Decl boolb",
+                            "children": []
+                        },
+                        {
+                            "label": "Decl struct Aa",
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "label": "Struct B",
+                    "children": [
+                        {
+                            "label": "Decl struct Aa",
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "label": "Top Level Decls",
+            "children": [
+                {
+                    "label": "Decl inti",
+                    "children": []
+                },
+                {
+                    "label": "Decl intj",
+                    "children": []
+                },
+                {
+                    "label": "Decl intk",
+                    "children": []
+                },
+                {
+                    "label": "Decl struct Bb",
+                    "children": []
+                },
+                {
+                    "label": "Decl struct Bbb",
+                    "children": []
+                },
+                {
+                    "label": "Decl struct Bbbb",
+                    "children": []
+                },
+                {
+                    "label": "Decl boolbob",
+                    "children": []
+                }
+            ]
+        },
+        {
+            "label": "Functions",
+            "children": [
+                {
+                    "label": "funf",
+                    "children": [
+                        {
+                            "label": "Params",
+                            "children": [
+                                {
+                                    "label": "Decl inti",
+                                    "children": []
+                                },
+                                {
+                                    "label": "Decl struct Bj",
+                                    "children": []
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Locals",
+                            "children": [
+                                {
+                                    "label": "Decl intl",
+                                    "children": []
+                                },
+                                {
+                                    "label": "Decl intk",
+                                    "children": []
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Return Type",
+                            "children": [
+                                {
+                                    "label": "struct A",
+                                    "children": []
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Body",
+                            "children": [
+                                {
+                                    "label": "Return",
+                                    "children": [
+                                        {
+                                            "label": "Dot field=i",
+                                            "children": [
+                                                {
+                                                    "label": "Dot field=a",
+                                                    "children": [
+                                                        {
+                                                            "label": "Dot field=a",
+                                                            "children": [
+                                                                {
+                                                                    "label": "Dot field=a",
+                                                                    "children": [
+                                                                        {
+                                                                            "label": "Dot field=a",
+                                                                            "children": [
+                                                                                {
+                                                                                    "label": "Id b",
+                                                                                    "children": []
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "funfoo",
+                    "children": [
+                        {
+                            "label": "Params",
+                            "children": [
+                                {
+                                    "label": "Decl intn",
+                                    "children": []
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Locals",
+                            "children": []
+                        },
+                        {
+                            "label": "Return Type",
+                            "children": [
+                                {
+                                    "label": "int",
+                                    "children": []
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Body",
+                            "children": [
+                                {
+                                    "label": "Branch",
+                                    "children": [
+                                        {
+                                            "label": "Condition",
+                                            "children": [
+                                                {
+                                                    "label": "Op +",
+                                                    "children": [
+                                                        {
+                                                            "label": "Id n",
+                                                            "children": []
+                                                        },
+                                                        {
+                                                            "label": "0",
+                                                            "children": []
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "then-body",
+                                            "children": [
+                                                {
+                                                    "label": "Return",
+                                                    "children": [
+                                                        {
+                                                            "label": "1",
+                                                            "children": []
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "else-body",
+                                            "children": [
+                                                {
+                                                    "label": "Return",
+                                                    "children": [
+                                                        {
+                                                            "label": "Op *",
+                                                            "children": [
+                                                                {
+                                                                    "label": "Id n",
+                                                                    "children": []
+                                                                },
+                                                                {
+                                                                    "label": "call foo",
+                                                                    "children": [
+                                                                        {
+                                                                            "label": "Args",
+                                                                            "children": [
+                                                                                {
+                                                                                    "label": "Op -",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "label": "Id n",
+                                                                                            "children": []
+                                                                                        },
+                                                                                        {
+                                                                                            "label": "1",
+                                                                                            "children": []
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "label": "Return",
+                                    "children": [
+                                        {
+                                            "label": "0",
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "fung",
+                    "children": [
+                        {
+                            "label": "Params",
+                            "children": [
+                                {
+                                    "label": "Decl inti",
+                                    "children": []
+                                },
+                                {
+                                    "label": "Decl struct Bj",
+                                    "children": []
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Locals",
+                            "children": [
+                                {
+                                    "label": "Decl intg",
+                                    "children": []
+                                },
+                                {
+                                    "label": "Decl intm",
+                                    "children": []
+                                },
+                                {
+                                    "label": "Decl intk",
+                                    "children": []
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Return Type",
+                            "children": [
+                                {
+                                    "label": "int",
+                                    "children": []
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Body",
+                            "children": [
+                                {
+                                    "label": "Return",
+                                    "children": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "funmain",
+                    "children": [
+                        {
+                            "label": "Params",
+                            "children": []
+                        },
+                        {
+                            "label": "Locals",
+                            "children": [
+                                {
+                                    "label": "Decl struct Aa",
+                                    "children": []
+                                },
+                                {
+                                    "label": "Decl inti",
+                                    "children": []
+                                },
+                                {
+                                    "label": "Decl intj",
+                                    "children": []
+                                },
+                                {
+                                    "label": "Decl intk",
+                                    "children": []
+                                },
+                                {
+                                    "label": "Decl boolb",
+                                    "children": []
+                                },
+                                {
+                                    "label": "Decl inth",
+                                    "children": []
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Return Type",
+                            "children": [
+                                {
+                                    "label": "int",
+                                    "children": []
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Body",
+                            "children": [
+                                {
+                                    "label": "Block",
+                                    "children": [
+                                        {
+                                            "label": "Assign",
+                                            "children": [
+                                                {
+                                                    "label": "Target",
+                                                    "children": [
+                                                        {
+                                                            "label": "LValueID i",
+                                                            "children": []
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "label": "Source",
+                                                    "children": [
+                                                        {
+                                                            "label": "Op -",
+                                                            "children": [
+                                                                {
+                                                                    "label": "Op -",
+                                                                    "children": [
+                                                                        {
+                                                                            "label": "2",
+                                                                            "children": []
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Branch",
+                                            "children": [
+                                                {
+                                                    "label": "Condition",
+                                                    "children": [
+                                                        {
+                                                            "label": "Op <",
+                                                            "children": [
+                                                                {
+                                                                    "label": "Id i",
+                                                                    "children": []
+                                                                },
+                                                                {
+                                                                    "label": "call g",
+                                                                    "children": [
+                                                                        {
+                                                                            "label": "Args",
+                                                                            "children": [
+                                                                                {
+                                                                                    "label": "1",
+                                                                                    "children": []
+                                                                                },
+                                                                                {
+                                                                                    "label": "null",
+                                                                                    "children": []
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "label": "then-body",
+                                                    "children": [
+                                                        {
+                                                            "label": "Print",
+                                                            "children": [
+                                                                {
+                                                                    "label": "Expression",
+                                                                    "children": [
+                                                                        {
+                                                                            "label": "1",
+                                                                            "children": []
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "label": "else-body",
+                                                    "children": []
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Branch",
+                                            "children": [
+                                                {
+                                                    "label": "Condition",
+                                                    "children": [
+                                                        {
+                                                            "label": "Op >",
+                                                            "children": [
+                                                                {
+                                                                    "label": "Id i",
+                                                                    "children": []
+                                                                },
+                                                                {
+                                                                    "label": "call g",
+                                                                    "children": [
+                                                                        {
+                                                                            "label": "Args",
+                                                                            "children": [
+                                                                                {
+                                                                                    "label": "1",
+                                                                                    "children": []
+                                                                                },
+                                                                                {
+                                                                                    "label": "null",
+                                                                                    "children": []
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "label": "then-body",
+                                                    "children": [
+                                                        {
+                                                            "label": "Print",
+                                                            "children": [
+                                                                {
+                                                                    "label": "Expression",
+                                                                    "children": [
+                                                                        {
+                                                                            "label": "1",
+                                                                            "children": []
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "label": "else-body",
+                                                    "children": [
+                                                        {
+                                                            "label": "Print endl",
+                                                            "children": [
+                                                                {
+                                                                    "label": "Expression",
+                                                                    "children": [
+                                                                        {
+                                                                            "label": "3",
+                                                                            "children": []
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "While",
+                                            "children": [
+                                                {
+                                                    "label": "Condition",
+                                                    "children": [
+                                                        {
+                                                            "label": "Op <",
+                                                            "children": [
+                                                                {
+                                                                    "label": "true",
+                                                                    "children": []
+                                                                },
+                                                                {
+                                                                    "label": "false",
+                                                                    "children": []
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "label": "Body",
+                                                    "children": [
+                                                        {
+                                                            "label": "Block",
+                                                            "children": [
+                                                                {
+                                                                    "label": "Print",
+                                                                    "children": [
+                                                                        {
+                                                                            "label": "Expression",
+                                                                            "children": [
+                                                                                {
+                                                                                    "label": "7",
+                                                                                    "children": []
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Invocation",
+                                            "children": [
+                                                {
+                                                    "label": "call f",
+                                                    "children": [
+                                                        {
+                                                            "label": "Args",
+                                                            "children": [
+                                                                {
+                                                                    "label": "call g",
+                                                                    "children": [
+                                                                        {
+                                                                            "label": "Args",
+                                                                            "children": [
+                                                                                {
+                                                                                    "label": "1",
+                                                                                    "children": []
+                                                                                },
+                                                                                {
+                                                                                    "label": "new",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "label": "Id B",
+                                                                                            "children": []
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "label": "2",
+                                                                    "children": []
+                                                                },
+                                                                {
+                                                                    "label": "new",
+                                                                    "children": [
+                                                                        {
+                                                                            "label": "Id B",
+                                                                            "children": []
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Print endl",
+                                            "children": [
+                                                {
+                                                    "label": "Expression",
+                                                    "children": [
+                                                        {
+                                                            "label": "Dot field=bob",
+                                                            "children": [
+                                                                {
+                                                                    "label": "call f",
+                                                                    "children": [
+                                                                        {
+                                                                            "label": "Args",
+                                                                            "children": [
+                                                                                {
+                                                                                    "label": "2",
+                                                                                    "children": []
+                                                                                },
+                                                                                {
+                                                                                    "label": "new",
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "label": "Id B",
+                                                                                            "children": []
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Print endl",
+                                            "children": [
+                                                {
+                                                    "label": "Expression",
+                                                    "children": [
+                                                        {
+                                                            "label": "Dot field=a",
+                                                            "children": [
+                                                                {
+                                                                    "label": "call foo",
+                                                                    "children": [
+                                                                        {
+                                                                            "label": "Args",
+                                                                            "children": [
+                                                                                {
+                                                                                    "label": "2",
+                                                                                    "children": []
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "label": "Return",
+                                    "children": [
+                                        {
+                                            "label": "0",
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

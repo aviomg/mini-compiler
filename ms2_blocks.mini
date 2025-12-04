@@ -1,0 +1,66 @@
+
+#input:
+#3 ....so readnum<=4 is true
+#5....so readnum<=4 is false
+
+
+
+int g;
+bool h;
+
+fun iftest(int readnum) int{
+  int ans;
+  ans=50;
+  if(readnum<=4){
+    ans=ans+200;
+  }else{
+    ans=ans+100;
+  }
+  return ans;
+}
+
+fun main() int{
+  int ex;
+  int r;
+  #bool b;
+  int readnum;
+  
+  ex=10;
+  r = 5*ex; #r is 50
+
+ 
+
+  #output: 101, 202, 303, 404, 505, 606, 0, 7, 8, 9. ok it worked!!!! so far so good.
+
+
+
+  while(ex<12){
+    readnum=read;
+    if(readnum<=4){
+      r=r+200;
+    }
+    else{
+      r=r+100;
+    }
+    print r endl;
+    ex = ex+1;
+  }
+  #should print 250, 350
+
+
+
+
+ return 0;
+}
+
+#expected output: 
+#250, 150, 6, 6
+
+#so far, i have handled a basic case where, for a struct, i can malloc empty space for it. and then i can fill the empty space when if
+#set the val of a field.
+# might still have to look into how to 'get' the value of a field eg if it was on the RHS
+#and still have to see whether the nested structs woudl work. for that, if it is on RHS, i need lvalue expr to store registers
+#where the POINTER to next struct is stored???? idk
+
+
+

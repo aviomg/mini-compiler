@@ -1,0 +1,56 @@
+struct Pair{
+  int x;
+  int y;
+};
+struct Quad{
+  int width;
+  int height;
+  bool isSquare;
+  struct Pair coords;
+};
+struct Shapes{
+  bool flag;
+  struct Pair startCoords;
+  struct Quad shape1;
+  struct Quad shape2;
+};
+int g;
+bool h;
+
+fun main() int{
+  int x;
+  int ex;
+  int r;
+  r = 20;
+  g = 3;
+  x=5;
+  x=x-r*g; #should be 5-60=55
+
+  ex = 11;
+  #if(sub(r) >= 3){
+  #  x=2;
+  #}
+  #ex = add(ex);
+  #while(ex > 0){
+  #  ex = add(ex);
+  #  r=-r;
+  #}
+  
+
+ return 0;
+}
+
+fun sub(int x) int{
+  int g;
+  bool hello;
+  hello = false;
+  g = 3;
+  return x - g;
+}
+
+fun add(int ex) int {
+  ex = ex - 1;
+  return ex;
+}
+
+

@@ -1,0 +1,69 @@
+struct Pair{
+  int x;
+  int y;
+};
+struct Quad{
+  int width;
+  int height;
+  bool isSquare;
+  struct Pair coords;
+};
+struct Shapes{
+  bool flag;
+  struct Pair startCoords;
+  struct Quad shape1;
+  struct Quad shape2;
+};
+int g;
+bool h;
+struct Shapes shapes1;  
+
+#fun sub(int a, int b) int{
+#    int ans;
+#    ans = a-b;
+#    return ans;
+#}
+
+
+fun main() int{
+  int x;
+  int ex;
+  int r;
+  bool b;
+  #struct Quad q;
+  struct Pair c1;
+  #struct Pair c2;
+  c1=new Pair;  #at this point, add _offset_ to current sp value. 
+  c1.x=15;
+  c1.y=2;
+  #c2 = new Pair;
+  #c2.x=10;
+  #c2.y=5;
+  #q=new Quad;
+  #q.height=10;
+  #q.width=15;
+  #q.isSquare=false;
+  #q.coords=c1;
+  #shapes1=new Shapes;
+  #shapes1.flag=false;
+  #shapes1.startCoords=c1;
+  #shapes1.shape1=q;
+  #shapes1.shape2=q;
+  r = 20;
+  g = 3;
+  x=5;
+  ex=3+4; #should be 7
+  b=false;
+  x=g;
+
+  #ex = sub(r,g);
+
+  #k = ex;
+  #r=-r;
+  #b=!b;
+ 
+ return 0;
+}
+
+
+

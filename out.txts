@@ -1,0 +1,76 @@
+Parse successful.
+
+ERRORS FOUND 0
+
+
+Structs
+| name   |   line |   num_fields |
+|:-------|-------:|-------------:|
+| Pair   |      1 |            2 |
+| Quad   |      5 |            4 |
+| Shapes |     11 |            4 |
+
+Struct Fields
+| struct   | field       | type        |   offset |
+|:---------|:------------|:------------|---------:|
+| Pair     | x           | int         |        0 |
+| Pair     | y           | int         |       -4 |
+| Quad     | coords      | struct Pair |      -12 |
+| Quad     | height      | int         |       -4 |
+| Quad     | isSquare    | bool        |       -8 |
+| Quad     | width       | int         |        0 |
+| Shapes   | flag        | bool        |        0 |
+| Shapes   | shape1      | struct Quad |       -8 |
+| Shapes   | shape2      | struct Quad |      -12 |
+| Shapes   | startCoords | struct Pair |       -4 |
+
+Functions
+| name   |   line | params   | ret   |
+|:-------|-------:|:---------|:------|
+| main   |     28 |          | int   |
+
+Globals
+| name   |   line | type   | label   |
+|:-------|-------:|:-------|:--------|
+| g      |     18 | int    | g       |
+| h      |     19 | bool   | h       |
+
+Locals
+| function   | name   | type   | kind   |   line |   offset |
+|:-----------|:-------|:-------|:-------|-------:|---------:|
+| main       | b      | bool   | local  |     32 |      -20 |
+| main       | ex     | int    | local  |     30 |      -12 |
+| main       | r      | int    | local  |     31 |      -16 |
+| main       | x      | int    | local  |     29 |       -8 |
+
+
+Structured AST JSON saved to ast.json
+self.structs has len of 3
+var: x.......reg:x5
+var: ex.......reg:x6
+var: r.......reg:x7
+var: b.......reg:x8
+struct name is Pair
+x with type {'type': 'int', 'offset': 0}
+y with type {'type': 'int', 'offset': -4}
+
+
+size of struct Pair is 8
+struct name is Quad
+width with type {'type': 'int', 'offset': 0}
+height with type {'type': 'int', 'offset': -4}
+isSquare with type {'type': 'bool', 'offset': -8}
+coords with type {'type': 'struct Pair', 'offset': -12}
+
+
+size of struct Quad is 16
+struct name is Shapes
+flag with type {'type': 'bool', 'offset': 0}
+startCoords with type {'type': 'struct Pair', 'offset': -4}
+shape1 with type {'type': 'struct Quad', 'offset': -8}
+shape2 with type {'type': 'struct Quad', 'offset': -12}
+
+
+size of struct Shapes is 16
+writing to file ms2testsnippet.s
+Graphviz AST written to out.svg

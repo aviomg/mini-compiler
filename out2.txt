@@ -1,0 +1,70 @@
+Parse successful.
+
+ERROR. Function 'f' must return a value of type 'struct A'. #21
+ERROR. Unexpected expression: conditional expression must evaluate to bool; found int. #26
+ERROR. Non-void function is missing return statement of type int: 'g'. #40
+ERROR. Unexpected expression: conditional expression must evaluate to bool; found None. #64
+ERROR. Cannot perform operation '<' with operand of type bool. #64
+ERROR. Expected 2 positional arguments and got 3 for fun 'f'. #68
+ERROR. 'bob' is not a valid field of type struct A. #69
+ERROR. Expected integer argument for print statement, got 'None'. #69
+ERROR. Invalid reference: dot operator cannot be used on value of type int. #70
+ERROR. Expected integer argument for print statement, got 'None'. #70
+ERRORS FOUND 10
+
+
+Structs
+| name   |   line |   num_fields |
+|:-------|-------:|-------------:|
+| A      |      2 |            4 |
+| B      |      9 |            1 |
+
+Struct Fields
+| struct   | field   | type     |
+|:---------|:--------|:---------|
+| A        | a       | struct A |
+| A        | b       | bool     |
+| A        | i       | int      |
+| A        | j1      | int      |
+| B        | a       | struct A |
+
+Functions
+| name   |   line | params        | ret      |
+|:-------|-------:|:--------------|:---------|
+| f      |     18 | int, struct B | struct A |
+| foo    |     24 | int           | int      |
+| g      |     37 | int, struct B | int      |
+| main   |     43 |               | int      |
+
+Globals
+| name   |   line | type     |
+|:-------|-------:|:---------|
+| b      |     15 | struct B |
+| bb     |     15 | struct B |
+| bbb    |     15 | struct B |
+| bob    |     16 | bool     |
+| i      |     14 | int      |
+| j      |     14 | int      |
+| k      |     14 | int      |
+
+Locals
+| function   | name   | type     | kind   |   line |
+|:-----------|:-------|:---------|:-------|-------:|
+| f          | i      | int      |        |     18 |
+| f          | j      | struct B |        |     18 |
+| f          | k      | int      |        |     20 |
+| f          | l      | int      |        |     20 |
+| foo        | n      | int      |        |     24 |
+| g          | g      | int      |        |     39 |
+| g          | i      | int      |        |     37 |
+| g          | j      | struct B |        |     37 |
+| g          | k      | int      |        |     39 |
+| g          | m      | int      |        |     39 |
+| main       | a      | struct A |        |     45 |
+| main       | b      | bool     |        |     47 |
+| main       | h      | int      |        |     48 |
+| main       | i      | int      |        |     46 |
+| main       | j      | int      |        |     46 |
+| main       | k      | int      |        |     46 |
+
+

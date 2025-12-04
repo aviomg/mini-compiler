@@ -1,0 +1,573 @@
+{
+  "node": "Program",
+  "types": [
+    {
+      "node": "TypeDecl",
+      "line": null,
+      "name": "Pair",
+      "fields": [
+        {
+          "node": "Decl",
+          "line": null,
+          "name": "x",
+          "type": {
+            "node": "Type",
+            "type": "int"
+          }
+        },
+        {
+          "node": "Decl",
+          "line": null,
+          "name": "y",
+          "type": {
+            "node": "Type",
+            "type": "int"
+          }
+        }
+      ]
+    }
+  ],
+  "declarations": [
+    {
+      "node": "Decl",
+      "line": null,
+      "name": "g",
+      "type": {
+        "node": "Type",
+        "type": "int"
+      }
+    },
+    {
+      "node": "Decl",
+      "line": null,
+      "name": "h",
+      "type": {
+        "node": "Type",
+        "type": "bool"
+      }
+    }
+  ],
+  "functions": [
+    {
+      "node": "Function",
+      "line": null,
+      "name": "sub",
+      "params": [
+        {
+          "node": "Decl",
+          "line": null,
+          "name": "a",
+          "type": {
+            "node": "Type",
+            "type": "int"
+          }
+        },
+        {
+          "node": "Decl",
+          "line": null,
+          "name": "b",
+          "type": {
+            "node": "Type",
+            "type": "int"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "node": "Decl",
+          "line": null,
+          "name": "ans",
+          "type": {
+            "node": "Type",
+            "type": "int"
+          }
+        }
+      ],
+      "return type": {
+        "node": "Type",
+        "type": "int"
+      },
+      "body": [
+        {
+          "node": "Assign",
+          "line": null,
+          "target": {
+            "node": "LValueId",
+            "line": null,
+            "name": "ans"
+          },
+          "source": {
+            "node": "Binary",
+            "line": null,
+            "Op": "-",
+            "left expression": {
+              "node": "Id",
+              "line": null,
+              "name": "a"
+            },
+            "right expression": {
+              "node": "Id",
+              "line": null,
+              "name": "b"
+            }
+          }
+        },
+        {
+          "node": "Return",
+          "line": null,
+          "expression": {
+            "node": "Id",
+            "line": null,
+            "name": "ans"
+          }
+        }
+      ]
+    },
+    {
+      "node": "Function",
+      "line": null,
+      "name": "addxy",
+      "params": [
+        {
+          "node": "Decl",
+          "line": null,
+          "name": "pair",
+          "type": {
+            "node": "Type",
+            "type": "struct",
+            "name": "Pair"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "node": "Decl",
+          "line": null,
+          "name": "ans",
+          "type": {
+            "node": "Type",
+            "type": "int"
+          }
+        }
+      ],
+      "return type": {
+        "node": "Type",
+        "type": "int"
+      },
+      "body": [
+        {
+          "node": "Assign",
+          "line": null,
+          "target": {
+            "node": "LValueId",
+            "line": null,
+            "name": "ans"
+          },
+          "source": {
+            "node": "Binary",
+            "line": null,
+            "Op": "+",
+            "left expression": {
+              "node": "Dot",
+              "line": null,
+              "left expression": {
+                "node": "Id",
+                "line": null,
+                "name": "pair"
+              },
+              "field": "x"
+            },
+            "right expression": {
+              "node": "Dot",
+              "line": null,
+              "left expression": {
+                "node": "Id",
+                "line": null,
+                "name": "pair"
+              },
+              "field": "y"
+            }
+          }
+        },
+        {
+          "node": "Assign",
+          "line": null,
+          "target": {
+            "node": "LValueDot",
+            "line": null,
+            "field": "x",
+            "left expression": {
+              "node": "LValueId",
+              "line": null,
+              "name": "pair"
+            }
+          },
+          "source": {
+            "node": "Id",
+            "line": null,
+            "name": "ans"
+          }
+        },
+        {
+          "node": "Return",
+          "line": null,
+          "expression": {
+            "node": "Id",
+            "line": null,
+            "name": "ans"
+          }
+        }
+      ]
+    },
+    {
+      "node": "Function",
+      "line": null,
+      "name": "main",
+      "params": [],
+      "locals": [
+        {
+          "node": "Decl",
+          "line": null,
+          "name": "ex",
+          "type": {
+            "node": "Type",
+            "type": "int"
+          }
+        },
+        {
+          "node": "Decl",
+          "line": null,
+          "name": "r",
+          "type": {
+            "node": "Type",
+            "type": "int"
+          }
+        },
+        {
+          "node": "Decl",
+          "line": null,
+          "name": "b",
+          "type": {
+            "node": "Type",
+            "type": "bool"
+          }
+        },
+        {
+          "node": "Decl",
+          "line": null,
+          "name": "readnum",
+          "type": {
+            "node": "Type",
+            "type": "int"
+          }
+        },
+        {
+          "node": "Decl",
+          "line": null,
+          "name": "z",
+          "type": {
+            "node": "Type",
+            "type": "int"
+          }
+        },
+        {
+          "node": "Decl",
+          "line": null,
+          "name": "p",
+          "type": {
+            "node": "Type",
+            "type": "struct",
+            "name": "Pair"
+          }
+        }
+      ],
+      "return type": {
+        "node": "Type",
+        "type": "int"
+      },
+      "body": [
+        {
+          "node": "Assign",
+          "line": null,
+          "target": {
+            "node": "LValueId",
+            "line": null,
+            "name": "p"
+          },
+          "source": {
+            "node": "New",
+            "line": null,
+            "type": {
+              "node": "Id",
+              "line": null,
+              "name": "Pair"
+            }
+          }
+        },
+        {
+          "node": "Assign",
+          "line": null,
+          "target": {
+            "node": "LValueDot",
+            "line": null,
+            "field": "y",
+            "left expression": {
+              "node": "LValueId",
+              "line": null,
+              "name": "p"
+            }
+          },
+          "source": {
+            "node": "Int",
+            "line": null,
+            "value": "75"
+          }
+        },
+        {
+          "node": "Assign",
+          "line": null,
+          "target": {
+            "node": "LValueDot",
+            "line": null,
+            "field": "x",
+            "left expression": {
+              "node": "LValueId",
+              "line": null,
+              "name": "p"
+            }
+          },
+          "source": {
+            "node": "Int",
+            "line": null,
+            "value": "25"
+          }
+        },
+        {
+          "node": "Assign",
+          "line": null,
+          "target": {
+            "node": "LValueId",
+            "line": null,
+            "name": "r"
+          },
+          "source": {
+            "node": "Invocation/CallExpr",
+            "line": null,
+            "name": "sub",
+            "args": [
+              {
+                "node": "Dot",
+                "line": null,
+                "left expression": {
+                  "node": "Id",
+                  "line": null,
+                  "name": "p"
+                },
+                "field": "x"
+              },
+              {
+                "node": "Dot",
+                "line": null,
+                "left expression": {
+                  "node": "Id",
+                  "line": null,
+                  "name": "p"
+                },
+                "field": "y"
+              }
+            ]
+          }
+        },
+        {
+          "node": "Print endl",
+          "line": null,
+          "expression": {
+            "node": "Id",
+            "line": null,
+            "name": "r"
+          }
+        },
+        {
+          "node": "Invocation/CallSmt",
+          "line": null,
+          "callee": {
+            "node": "Invocation/CallExpr",
+            "line": null,
+            "name": "addxy",
+            "args": [
+              {
+                "node": "Id",
+                "line": null,
+                "name": "p"
+              }
+            ]
+          }
+        },
+        {
+          "node": "Print endl",
+          "line": null,
+          "expression": {
+            "node": "Dot",
+            "line": null,
+            "left expression": {
+              "node": "Id",
+              "line": null,
+              "name": "p"
+            },
+            "field": "x"
+          }
+        },
+        {
+          "node": "Assign",
+          "line": null,
+          "target": {
+            "node": "LValueId",
+            "line": null,
+            "name": "ex"
+          },
+          "source": {
+            "node": "Int",
+            "line": null,
+            "value": "10"
+          }
+        },
+        {
+          "node": "Assign",
+          "line": null,
+          "target": {
+            "node": "LValueId",
+            "line": null,
+            "name": "r"
+          },
+          "source": {
+            "node": "Unary",
+            "line": null,
+            "Op": "-",
+            "expression": {
+              "node": "Id",
+              "line": null,
+              "name": "r"
+            }
+          }
+        },
+        {
+          "node": "Assign",
+          "line": null,
+          "target": {
+            "node": "LValueId",
+            "line": null,
+            "name": "z"
+          },
+          "source": {
+            "node": "Binary",
+            "line": null,
+            "Op": "/",
+            "left expression": {
+              "node": "Binary",
+              "line": null,
+              "Op": "*",
+              "left expression": {
+                "node": "Binary",
+                "line": null,
+                "Op": "+",
+                "left expression": {
+                  "node": "Int",
+                  "line": null,
+                  "value": "2"
+                },
+                "right expression": {
+                  "node": "Id",
+                  "line": null,
+                  "name": "r"
+                }
+              },
+              "right expression": {
+                "node": "Int",
+                "line": null,
+                "value": "3"
+              }
+            },
+            "right expression": {
+              "node": "Id",
+              "line": null,
+              "name": "ex"
+            }
+          }
+        },
+        {
+          "node": "Print endl",
+          "line": null,
+          "expression": {
+            "node": "Id",
+            "line": null,
+            "name": "z"
+          }
+        },
+        {
+          "node": "Assign",
+          "line": null,
+          "target": {
+            "node": "LValueId",
+            "line": null,
+            "name": "b"
+          },
+          "source": {
+            "node": "Binary",
+            "line": null,
+            "Op": "<=",
+            "left expression": {
+              "node": "Id",
+              "line": null,
+              "name": "r"
+            },
+            "right expression": {
+              "node": "Id",
+              "line": null,
+              "name": "ex"
+            }
+          }
+        },
+        {
+          "node": "If/Branch",
+          "line": null,
+          "condition": {
+            "node": "Id",
+            "line": null,
+            "name": "b"
+          },
+          "then-body": [
+            {
+              "node": "Print endl",
+              "line": null,
+              "expression": {
+                "node": "Int",
+                "line": null,
+                "value": "1"
+              }
+            }
+          ],
+          "else-body": [
+            {
+              "node": "Print endl",
+              "line": null,
+              "expression": {
+                "node": "Int",
+                "line": null,
+                "value": "0"
+              }
+            }
+          ]
+        },
+        {
+          "node": "Return",
+          "line": null,
+          "expression": {
+            "node": "Int",
+            "line": null,
+            "value": "0"
+          }
+        }
+      ]
+    }
+  ]
+}

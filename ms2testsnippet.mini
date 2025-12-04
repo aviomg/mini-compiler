@@ -1,0 +1,80 @@
+struct Pair{
+  int x;
+  int y;
+};
+
+int g;
+bool h;
+
+fun sub(int a, int b) int{
+    int ans;
+    ans = a-b;
+    return ans;
+}
+
+fun addxy(struct Pair pair) int{
+  int ans;
+  ans=pair.x+pair.y;
+  pair.x=ans;
+  return ans;
+}
+
+
+fun main() int{
+  int ex;
+  int r;
+  bool b;
+  int readnum;
+  int z;
+  struct Pair p;
+  p = new Pair;
+  p.y=75;
+  p.x=25;
+ 
+ 
+  #ex=s.shape1.coords.x; 
+
+  r=sub(p.x,p.y);   #r aka x6 should be 25-75=-50
+  print r endl; #EO:-50
+  addxy(p); 
+  print p.x endl; #EO=100
+  ex=10;
+
+  r=-r; #r should now be 50
+  z= (2+r)*3/ex; #should be 14
+ print z endl; #EO=14
+
+ # readnum=read; #we will do an if statement on whether this number is <4
+ # if(readnum<=4){
+ #   r = r+200; #if it goes through, r aka x6 should equal 150
+ # }
+ # else{
+ #   r=r+100;
+ # }
+  
+
+ # if (p.y > 50){ #this shld always go through bc p.y=75
+ #   ex=20;        #if it goes thru, ex=20. if not, ex=10;
+ #   print ex endl; #EO=20
+ # }
+
+ # r=2;
+  #while(ex==10){
+  #  print ex endl;
+  #}
+
+  b = r<=ex;
+  ex= r + addxy(p);
+
+
+ return 0;
+}
+
+#so far, i have handled a basic case where, for a struct, i can malloc empty space for it. and then i can fill the empty space when if
+#set the val of a field.
+# might still have to look into how to 'get' the value of a field eg if it was on the RHS
+#and still have to see whether the nested structs woudl work. for that, if it is on RHS, i need lvalue expr to store registers
+#where the POINTER to next struct is stored???? idk
+
+#-50,100,14,1
+

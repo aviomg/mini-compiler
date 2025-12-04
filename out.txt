@@ -1,0 +1,766 @@
+Parse successful.
+
+ERRORS FOUND 0
+
+
+Structs
+| name   |   line |   num_fields |
+|:-------|-------:|-------------:|
+| Pair   |      1 |            2 |
+
+Struct Fields
+| struct   | field   | type   |   offset |
+|:---------|:--------|:-------|---------:|
+| Pair     | x       | int    |        0 |
+| Pair     | y       | int    |        4 |
+
+Functions
+| name   |   line | params      | ret   |
+|:-------|-------:|:------------|:------|
+| addxy  |     15 | struct Pair | int   |
+| main   |     23 |             | int   |
+| sub    |      9 | int, int    | int   |
+
+Globals
+| name   |   line | type   | label   |
+|:-------|-------:|:-------|:--------|
+| g      |      6 | int    | g       |
+| h      |      7 | bool   | h       |
+
+Locals
+| function   | name    | type        | kind   |   line |   offset |
+|:-----------|:--------|:------------|:-------|-------:|---------:|
+| addxy      | ans     | int         | local  |     16 |        4 |
+| addxy      | pair    | struct Pair | param  |     15 |        0 |
+| main       | b       | bool        | local  |     26 |        8 |
+| main       | ex      | int         | local  |     24 |        0 |
+| main       | p       | struct Pair | local  |     29 |       20 |
+| main       | r       | int         | local  |     25 |        4 |
+| main       | readnum | int         | local  |     27 |       12 |
+| main       | z       | int         | local  |     28 |       16 |
+| sub        | a       | int         | param  |      9 |        0 |
+| sub        | ans     | int         | local  |     10 |        8 |
+| sub        | b       | int         | param  |      9 |        4 |
+
+
+var: a.......reg:x5
+var: b.......reg:x5
+var: ans.......reg:x5
+
+
+var: pair.......reg:x5
+var: ans.......reg:x5
+
+
+var: ex.......reg:x5
+var: r.......reg:x5
+var: b.......reg:x5
+var: readnum.......reg:x5
+var: z.......reg:x5
+var: p.......reg:x5
+
+
+x with offset 0 and type int
+y with offset 4 and type int
+writing to file ms2testsnippetfirst-pass.s
+
+----------------------------------
+
+in proc sub
+checking block.instructions at index 0, for block 0
+checking block.instructions at index 1, for block 0
+checking block.instructions at index 2, for block 0
+checking block.instructions at index 3, for block 0
+checking block.instructions at index 4, for block 0
+checking block.instructions at index 5, for block 0
+checking block.instructions at index 6, for block 0
+checking block.instructions at index 7, for block 0
+checking block.instructions at index 8, for block 0
+checking block.instructions at index 9, for block 0
+checking block.instructions at index 10, for block 0
+checking block.instructions at index 11, for block 0
+checking block.instructions at index 12, for block 0
+checking block.instructions at index 13, for block 0
+checking block.instructions at index 14, for block 0
+checking block.instructions at index 15, for block 0
+checking block.instructions at index 16, for block 0
+checking block.instructions at index 17, for block 0
+checking block.instructions at index 18, for block 0
+checking block.instructions at index 19, for block 0
+checking block.instructions at index 20, for block 0
+checking block.instructions at index 21, for block 0
+checking block.instructions at index 22, for block 0
+checking block.instructions at index 23, for block 0
+checking block.instructions at index 24, for block 0
+checking block.instructions at index 25, for block 0
+checking block.instructions at index 26, for block 0
+checking block.instructions at index 27, for block 0
+checking block.instructions at index 28, for block 0
+checking block.instructions at index 29, for block 0
+checking block.instructions at index 30, for block 0
+checking block.instructions at index 31, for block 0
+checking block.instructions at index 32, for block 0
+checking block.instructions at index 33, for block 0
+checking block.instructions at index 34, for block 0
+checking block.instructions at index 35, for block 0
+checking block.instructions at index 36, for block 0
+checking block.instructions at index 37, for block 0
+checking block.instructions at index 38, for block 0
+checking block.instructions at index 39, for block 0
+checking block.instructions at index 40, for block 0
+call live registers for proc sub:
+in proc addxy
+checking block.instructions at index 0, for block 1
+checking block.instructions at index 1, for block 1
+checking block.instructions at index 2, for block 1
+checking block.instructions at index 3, for block 1
+checking block.instructions at index 4, for block 1
+checking block.instructions at index 5, for block 1
+checking block.instructions at index 6, for block 1
+checking block.instructions at index 7, for block 1
+checking block.instructions at index 8, for block 1
+checking block.instructions at index 9, for block 1
+checking block.instructions at index 10, for block 1
+checking block.instructions at index 11, for block 1
+checking block.instructions at index 12, for block 1
+checking block.instructions at index 13, for block 1
+checking block.instructions at index 14, for block 1
+checking block.instructions at index 15, for block 1
+checking block.instructions at index 16, for block 1
+checking block.instructions at index 17, for block 1
+checking block.instructions at index 18, for block 1
+checking block.instructions at index 19, for block 1
+checking block.instructions at index 20, for block 1
+checking block.instructions at index 21, for block 1
+checking block.instructions at index 22, for block 1
+checking block.instructions at index 23, for block 1
+checking block.instructions at index 24, for block 1
+checking block.instructions at index 25, for block 1
+checking block.instructions at index 26, for block 1
+checking block.instructions at index 27, for block 1
+checking block.instructions at index 28, for block 1
+checking block.instructions at index 29, for block 1
+checking block.instructions at index 30, for block 1
+checking block.instructions at index 31, for block 1
+checking block.instructions at index 32, for block 1
+checking block.instructions at index 33, for block 1
+checking block.instructions at index 34, for block 1
+checking block.instructions at index 35, for block 1
+checking block.instructions at index 36, for block 1
+checking block.instructions at index 37, for block 1
+checking block.instructions at index 38, for block 1
+checking block.instructions at index 39, for block 1
+checking block.instructions at index 40, for block 1
+checking block.instructions at index 41, for block 1
+checking block.instructions at index 42, for block 1
+checking block.instructions at index 43, for block 1
+checking block.instructions at index 44, for block 1
+checking block.instructions at index 45, for block 1
+checking block.instructions at index 46, for block 1
+call live registers for proc addxy:
+in proc main
+checking block.instructions at index 0, for block 2
+checking block.instructions at index 1, for block 2
+checking block.instructions at index 0, for block 3
+checking block.instructions at index 1, for block 3
+checking block.instructions at index 2, for block 3
+checking block.instructions at index 3, for block 3
+checking block.instructions at index 4, for block 3
+checking block.instructions at index 5, for block 3
+checking block.instructions at index 6, for block 3
+checking block.instructions at index 7, for block 3
+checking block.instructions at index 8, for block 3
+checking block.instructions at index 9, for block 3
+checking block.instructions at index 10, for block 3
+checking block.instructions at index 11, for block 3
+checking block.instructions at index 0, for block 4
+checking block.instructions at index 1, for block 4
+checking block.instructions at index 2, for block 4
+checking block.instructions at index 3, for block 4
+checking block.instructions at index 4, for block 4
+checking block.instructions at index 5, for block 4
+checking block.instructions at index 6, for block 4
+checking block.instructions at index 7, for block 4
+checking block.instructions at index 8, for block 4
+checking block.instructions at index 9, for block 4
+checking block.instructions at index 10, for block 4
+checking block.instructions at index 11, for block 4
+checking block.instructions at index 12, for block 4
+checking block.instructions at index 13, for block 4
+checking block.instructions at index 14, for block 4
+checking block.instructions at index 15, for block 4
+checking block.instructions at index 16, for block 4
+checking block.instructions at index 17, for block 4
+checking block.instructions at index 18, for block 4
+checking block.instructions at index 19, for block 4
+checking block.instructions at index 0, for block 5
+checking block.instructions at index 1, for block 5
+checking block.instructions at index 2, for block 5
+checking block.instructions at index 3, for block 5
+checking block.instructions at index 4, for block 5
+checking block.instructions at index 5, for block 5
+checking block.instructions at index 0, for block 6
+checking block.instructions at index 1, for block 6
+checking block.instructions at index 0, for block 7
+checking block.instructions at index 1, for block 7
+checking block.instructions at index 2, for block 7
+checking block.instructions at index 3, for block 7
+checking block.instructions at index 4, for block 7
+checking block.instructions at index 0, for block 8
+checking block.instructions at index 1, for block 8
+checking block.instructions at index 2, for block 8
+checking block.instructions at index 3, for block 8
+checking block.instructions at index 4, for block 8
+checking block.instructions at index 5, for block 8
+checking block.instructions at index 6, for block 8
+checking block.instructions at index 0, for block 9
+checking block.instructions at index 1, for block 9
+checking block.instructions at index 0, for block 10
+checking block.instructions at index 1, for block 10
+checking block.instructions at index 2, for block 10
+checking block.instructions at index 3, for block 10
+checking block.instructions at index 4, for block 10
+checking block.instructions at index 5, for block 10
+checking block.instructions at index 6, for block 10
+checking block.instructions at index 7, for block 10
+checking block.instructions at index 8, for block 10
+checking block.instructions at index 9, for block 10
+checking block.instructions at index 10, for block 10
+checking block.instructions at index 11, for block 10
+checking block.instructions at index 0, for block 11
+checking block.instructions at index 1, for block 11
+checking block.instructions at index 2, for block 11
+checking block.instructions at index 0, for block 12
+checking block.instructions at index 1, for block 12
+checking block.instructions at index 2, for block 12
+checking block.instructions at index 3, for block 12
+checking block.instructions at index 0, for block 13
+checking block.instructions at index 1, for block 13
+checking block.instructions at index 0, for block 14
+checking block.instructions at index 1, for block 14
+checking block.instructions at index 2, for block 14
+checking block.instructions at index 3, for block 14
+checking block.instructions at index 0, for block 15
+checking block.instructions at index 1, for block 15
+checking block.instructions at index 0, for block 16
+checking block.instructions at index 1, for block 16
+checking block.instructions at index 2, for block 16
+checking block.instructions at index 3, for block 16
+checking block.instructions at index 4, for block 16
+checking block.instructions at index 5, for block 16
+checking block.instructions at index 6, for block 16
+checking block.instructions at index 7, for block 16
+checking block.instructions at index 0, for block 17
+checking block.instructions at index 1, for block 17
+checking block.instructions at index 2, for block 17
+checking block.instructions at index 3, for block 17
+checking block.instructions at index 4, for block 17
+checking block.instructions at index 5, for block 17
+call live registers for proc main:
+lines to analyze for sub
+lw x6 0(x2)
+lw x7 4(x2)
+sub x5 x6 x7
+sw x5 8(x2) #placing local's value in stack rather than reg
+reg ranges for sub
+x6: (19, 20)
+x7: (20, 20)
+x5: (21, 21)
+call live registers for sub
+sorted intervals for sub
+x6: 19-20...call live? False
+current state after processing reg x6:
+assign:{'x6': 's11'}
+active: {'x6': {'physreg': 's11', 'end': 20}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10']
+x7: 20-20...call live? False
+current state after processing reg x7:
+assign:{'x6': 's11', 'x7': 's10'}
+active: {'x6': {'physreg': 's11', 'end': 20}, 'x7': {'physreg': 's10', 'end': 20}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9']
+x5: 21-21...call live? False
+current state after processing reg x5:
+assign:{'x6': 's11', 'x7': 's10', 'x5': 's10'}
+active: {'x5': {'physreg': 's10', 'end': 21}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's11']
+fixed instructions for proc sub:
+lw s11 0(x2)
+lw s10 4(x2)
+sub s10 s11 s10
+sw s10 8(x2) #placing local's value in stack rather than reg
+lines to analyze for addxy
+lw x6 0(x2)
+addi x7 x6 0
+lw x7 0(x7)
+lw x8 0(x2)
+addi x9 x8 4
+lw x9 0(x9)
+add x5 x7 x9
+sw x5 4(x2) #placing local's value in stack rather than reg
+lw x12 4(x2)
+lw x13 0(x2)
+addi x14 x13 0
+sw x12 0(x14)
+reg ranges for addxy
+x6: (17, 17)
+x7: (18, 22)
+x8: (20, 20)
+x9: (21, 22)
+x5: (23, 23)
+x12: (25, 27)
+x13: (26, 26)
+x14: (27, 27)
+call live registers for addxy
+sorted intervals for addxy
+x6: 17-17...call live? False
+current state after processing reg x6:
+assign:{'x6': 's11'}
+active: {'x6': {'physreg': 's11', 'end': 17}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10']
+x7: 18-22...call live? False
+current state after processing reg x7:
+assign:{'x6': 's11', 'x7': 's11'}
+active: {'x7': {'physreg': 's11', 'end': 22}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10']
+x8: 20-20...call live? False
+current state after processing reg x8:
+assign:{'x6': 's11', 'x7': 's11', 'x8': 's10'}
+active: {'x7': {'physreg': 's11', 'end': 22}, 'x8': {'physreg': 's10', 'end': 20}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9']
+x9: 21-22...call live? False
+current state after processing reg x9:
+assign:{'x6': 's11', 'x7': 's11', 'x8': 's10', 'x9': 's10'}
+active: {'x7': {'physreg': 's11', 'end': 22}, 'x9': {'physreg': 's10', 'end': 22}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9']
+x5: 23-23...call live? False
+current state after processing reg x5:
+assign:{'x6': 's11', 'x7': 's11', 'x8': 's10', 'x9': 's10', 'x5': 's10'}
+active: {'x5': {'physreg': 's10', 'end': 23}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's11']
+x12: 25-27...call live? False
+current state after processing reg x12:
+assign:{'x6': 's11', 'x7': 's11', 'x8': 's10', 'x9': 's10', 'x5': 's10', 'x12': 's10'}
+active: {'x12': {'physreg': 's10', 'end': 27}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's11']
+x13: 26-26...call live? False
+current state after processing reg x13:
+assign:{'x6': 's11', 'x7': 's11', 'x8': 's10', 'x9': 's10', 'x5': 's10', 'x12': 's10', 'x13': 's11'}
+active: {'x12': {'physreg': 's10', 'end': 27}, 'x13': {'physreg': 's11', 'end': 26}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9']
+x14: 27-27...call live? False
+current state after processing reg x14:
+assign:{'x6': 's11', 'x7': 's11', 'x8': 's10', 'x9': 's10', 'x5': 's10', 'x12': 's10', 'x13': 's11', 'x14': 's11'}
+active: {'x12': {'physreg': 's10', 'end': 27}, 'x14': {'physreg': 's11', 'end': 27}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9']
+fixed instructions for proc addxy:
+lw s11 0(x2)
+addi s11 s11 0
+lw s11 0(s11)
+lw s10 0(x2)
+addi s10 s10 4
+lw s10 0(s10)
+add s10 s11 s10
+sw s10 4(x2) #placing local's value in stack rather than reg
+lw s10 4(x2)
+lw s11 0(x2)
+addi s11 s11 0
+sw s10 0(s11)
+lines to analyze for main
+li x10 8
+jal malloc
+sw x10 20(x2) #placing local's value in stack rather than reg
+li x5 75
+lw x6 20(x2)
+addi x7 x6 4
+sw x5 0(x7)
+li x8 25
+lw x9 20(x2)
+addi x12 x9 0
+sw x8 0(x12)
+lw x13 20(x2)
+addi x14 x13 0
+lw x14 0(x14)
+lw x15 20(x2)
+addi x16 x15 4
+lw x16 0(x16)
+addi x10 x14 0x0 #start of precall
+addi x11 x16 0x0
+addi x2 x2 -4
+sw x1 0(x2)
+jal sub
+lw x1 0(x2) 
+addi x2 x2 4
+sw x10 4(x2) #placing local's value in stack rather than reg
+lw x17 4(x2)
+addi x10 x17 0
+jal print_int
+li x10 0x0A
+jal print_char
+lw x18 20(x2)
+addi x10 x18 0x0 #start of precall
+addi x2 x2 -4
+sw x1 0(x2)
+jal addxy
+lw x1 0(x2) 
+addi x2 x2 4
+lw x19 20(x2)
+addi x20 x19 0
+lw x20 0(x20)
+addi x10 x20 0
+jal print_int
+li x10 0x0A
+jal print_char
+li x21 10
+sw x21 0(x2) #placing local's value in stack rather than reg
+lw x22 4(x2)
+sub x23 x0 x22
+sw x23 4(x2) #placing local's value in stack rather than reg
+lw x27 4(x2)
+addi x26 x27 2
+li x28 3
+mul x25 x26 x28
+lw x29 0(x2)
+li x24 0x0
+blt x25 x29 endWhile0
+sub x25 x25 x29
+addi x24 x24 0x1
+j whileStart0
+sw x24 16(x2) #placing local's value in stack rather than reg
+lw x30 16(x2)
+addi x10 x30 0
+jal print_int
+li x10 0x0A
+jal print_char
+lw x32 4(x2)
+lw x33 0(x2)
+slt x31 x33 x32
+beqz x31 else0
+li x31 0x0
+jal x0 endIfBlock0
+li x31 0x1
+sw x31 8(x2) #placing local's value in stack rather than reg
+lw x35 4(x2)
+lw x36 20(x2)
+addi x10 x36 0x0 #start of precall
+addi x2 x2 -4
+sw x1 0(x2)
+jal addxy
+lw x1 0(x2) 
+addi x2 x2 4
+add x34 x35 x10
+sw x34 0(x2) #placing local's value in stack rather than reg
+addi x10 x0 0
+jal x0 exit
+reg ranges for main
+x5: (15, 17)
+x6: (16, 16)
+x7: (17, 17)
+x8: (19, 21)
+x9: (20, 20)
+x12: (21, 21)
+x13: (23, 23)
+x14: (24, 28)
+x15: (26, 26)
+x16: (27, 29)
+x17: (37, 37)
+x18: (42, 42)
+x19: (49, 49)
+x20: (50, 51)
+x21: (56, 56)
+x22: (58, 58)
+x23: (59, 59)
+x27: (61, 61)
+x26: (62, 63)
+x28: (63, 63)
+x25: (64, 67)
+x29: (65, 67)
+x24: (66, 70)
+x30: (72, 72)
+x32: (77, 78)
+x33: (78, 78)
+x31: (79, 83)
+x35: (85, 92)
+x36: (86, 86)
+x34: (93, 93)
+call live registers for main
+x31
+x35
+sorted intervals for main
+x5: 15-17...call live? False
+current state after processing reg x5:
+assign:{'x5': 's11'}
+active: {'x5': {'physreg': 's11', 'end': 17}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10']
+x6: 16-16...call live? False
+current state after processing reg x6:
+assign:{'x5': 's11', 'x6': 's10'}
+active: {'x5': {'physreg': 's11', 'end': 17}, 'x6': {'physreg': 's10', 'end': 16}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9']
+x7: 17-17...call live? False
+current state after processing reg x7:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10'}
+active: {'x5': {'physreg': 's11', 'end': 17}, 'x7': {'physreg': 's10', 'end': 17}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9']
+x8: 19-21...call live? False
+current state after processing reg x8:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10'}
+active: {'x8': {'physreg': 's10', 'end': 21}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's11']
+x9: 20-20...call live? False
+current state after processing reg x9:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11'}
+active: {'x8': {'physreg': 's10', 'end': 21}, 'x9': {'physreg': 's11', 'end': 20}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9']
+x12: 21-21...call live? False
+current state after processing reg x12:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11'}
+active: {'x8': {'physreg': 's10', 'end': 21}, 'x12': {'physreg': 's11', 'end': 21}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9']
+x13: 23-23...call live? False
+current state after processing reg x13:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11', 'x13': 's11'}
+active: {'x13': {'physreg': 's11', 'end': 23}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10']
+x14: 24-28...call live? False
+current state after processing reg x14:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11', 'x13': 's11', 'x14': 's11'}
+active: {'x14': {'physreg': 's11', 'end': 28}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10']
+x15: 26-26...call live? False
+current state after processing reg x15:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11', 'x13': 's11', 'x14': 's11', 'x15': 's10'}
+active: {'x14': {'physreg': 's11', 'end': 28}, 'x15': {'physreg': 's10', 'end': 26}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9']
+x16: 27-29...call live? False
+current state after processing reg x16:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11', 'x13': 's11', 'x14': 's11', 'x15': 's10', 'x16': 's10'}
+active: {'x14': {'physreg': 's11', 'end': 28}, 'x16': {'physreg': 's10', 'end': 29}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9']
+x17: 37-37...call live? False
+current state after processing reg x17:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11', 'x13': 's11', 'x14': 's11', 'x15': 's10', 'x16': 's10', 'x17': 's10'}
+active: {'x17': {'physreg': 's10', 'end': 37}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's11']
+x18: 42-42...call live? False
+current state after processing reg x18:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11', 'x13': 's11', 'x14': 's11', 'x15': 's10', 'x16': 's10', 'x17': 's10', 'x18': 's10'}
+active: {'x18': {'physreg': 's10', 'end': 42}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's11']
+x19: 49-49...call live? False
+current state after processing reg x19:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11', 'x13': 's11', 'x14': 's11', 'x15': 's10', 'x16': 's10', 'x17': 's10', 'x18': 's10', 'x19': 's10'}
+active: {'x19': {'physreg': 's10', 'end': 49}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's11']
+x20: 50-51...call live? False
+current state after processing reg x20:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11', 'x13': 's11', 'x14': 's11', 'x15': 's10', 'x16': 's10', 'x17': 's10', 'x18': 's10', 'x19': 's10', 'x20': 's10'}
+active: {'x20': {'physreg': 's10', 'end': 51}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's11']
+x21: 56-56...call live? False
+current state after processing reg x21:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11', 'x13': 's11', 'x14': 's11', 'x15': 's10', 'x16': 's10', 'x17': 's10', 'x18': 's10', 'x19': 's10', 'x20': 's10', 'x21': 's10'}
+active: {'x21': {'physreg': 's10', 'end': 56}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's11']
+x22: 58-58...call live? False
+current state after processing reg x22:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11', 'x13': 's11', 'x14': 's11', 'x15': 's10', 'x16': 's10', 'x17': 's10', 'x18': 's10', 'x19': 's10', 'x20': 's10', 'x21': 's10', 'x22': 's10'}
+active: {'x22': {'physreg': 's10', 'end': 58}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's11']
+x23: 59-59...call live? False
+current state after processing reg x23:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11', 'x13': 's11', 'x14': 's11', 'x15': 's10', 'x16': 's10', 'x17': 's10', 'x18': 's10', 'x19': 's10', 'x20': 's10', 'x21': 's10', 'x22': 's10', 'x23': 's10'}
+active: {'x23': {'physreg': 's10', 'end': 59}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's11']
+x27: 61-61...call live? False
+current state after processing reg x27:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11', 'x13': 's11', 'x14': 's11', 'x15': 's10', 'x16': 's10', 'x17': 's10', 'x18': 's10', 'x19': 's10', 'x20': 's10', 'x21': 's10', 'x22': 's10', 'x23': 's10', 'x27': 's10'}
+active: {'x27': {'physreg': 's10', 'end': 61}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's11']
+x26: 62-63...call live? False
+current state after processing reg x26:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11', 'x13': 's11', 'x14': 's11', 'x15': 's10', 'x16': 's10', 'x17': 's10', 'x18': 's10', 'x19': 's10', 'x20': 's10', 'x21': 's10', 'x22': 's10', 'x23': 's10', 'x27': 's10', 'x26': 's10'}
+active: {'x26': {'physreg': 's10', 'end': 63}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's11']
+x28: 63-63...call live? False
+current state after processing reg x28:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11', 'x13': 's11', 'x14': 's11', 'x15': 's10', 'x16': 's10', 'x17': 's10', 'x18': 's10', 'x19': 's10', 'x20': 's10', 'x21': 's10', 'x22': 's10', 'x23': 's10', 'x27': 's10', 'x26': 's10', 'x28': 's11'}
+active: {'x26': {'physreg': 's10', 'end': 63}, 'x28': {'physreg': 's11', 'end': 63}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9']
+x25: 64-67...call live? False
+current state after processing reg x25:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11', 'x13': 's11', 'x14': 's11', 'x15': 's10', 'x16': 's10', 'x17': 's10', 'x18': 's10', 'x19': 's10', 'x20': 's10', 'x21': 's10', 'x22': 's10', 'x23': 's10', 'x27': 's10', 'x26': 's10', 'x28': 's11', 'x25': 's11'}
+active: {'x25': {'physreg': 's11', 'end': 67}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10']
+x29: 65-67...call live? False
+current state after processing reg x29:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11', 'x13': 's11', 'x14': 's11', 'x15': 's10', 'x16': 's10', 'x17': 's10', 'x18': 's10', 'x19': 's10', 'x20': 's10', 'x21': 's10', 'x22': 's10', 'x23': 's10', 'x27': 's10', 'x26': 's10', 'x28': 's11', 'x25': 's11', 'x29': 's10'}
+active: {'x25': {'physreg': 's11', 'end': 67}, 'x29': {'physreg': 's10', 'end': 67}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9']
+x24: 66-70...call live? False
+current state after processing reg x24:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11', 'x13': 's11', 'x14': 's11', 'x15': 's10', 'x16': 's10', 'x17': 's10', 'x18': 's10', 'x19': 's10', 'x20': 's10', 'x21': 's10', 'x22': 's10', 'x23': 's10', 'x27': 's10', 'x26': 's10', 'x28': 's11', 'x25': 's11', 'x29': 's10', 'x24': 's9'}
+active: {'x25': {'physreg': 's11', 'end': 67}, 'x29': {'physreg': 's10', 'end': 67}, 'x24': {'physreg': 's9', 'end': 70}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8']
+x30: 72-72...call live? False
+current state after processing reg x30:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11', 'x13': 's11', 'x14': 's11', 'x15': 's10', 'x16': 's10', 'x17': 's10', 'x18': 's10', 'x19': 's10', 'x20': 's10', 'x21': 's10', 'x22': 's10', 'x23': 's10', 'x27': 's10', 'x26': 's10', 'x28': 's11', 'x25': 's11', 'x29': 's10', 'x24': 's9', 'x30': 's9'}
+active: {'x30': {'physreg': 's9', 'end': 72}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's11', 's10']
+x32: 77-78...call live? False
+current state after processing reg x32:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11', 'x13': 's11', 'x14': 's11', 'x15': 's10', 'x16': 's10', 'x17': 's10', 'x18': 's10', 'x19': 's10', 'x20': 's10', 'x21': 's10', 'x22': 's10', 'x23': 's10', 'x27': 's10', 'x26': 's10', 'x28': 's11', 'x25': 's11', 'x29': 's10', 'x24': 's9', 'x30': 's9', 'x32': 's9'}
+active: {'x32': {'physreg': 's9', 'end': 78}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's11', 's10']
+x33: 78-78...call live? False
+current state after processing reg x33:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11', 'x13': 's11', 'x14': 's11', 'x15': 's10', 'x16': 's10', 'x17': 's10', 'x18': 's10', 'x19': 's10', 'x20': 's10', 'x21': 's10', 'x22': 's10', 'x23': 's10', 'x27': 's10', 'x26': 's10', 'x28': 's11', 'x25': 's11', 'x29': 's10', 'x24': 's9', 'x30': 's9', 'x32': 's9', 'x33': 's10'}
+active: {'x32': {'physreg': 's9', 'end': 78}, 'x33': {'physreg': 's10', 'end': 78}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's11']
+x31: 79-83...call live? True
+current state after processing reg x31:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11', 'x13': 's11', 'x14': 's11', 'x15': 's10', 'x16': 's10', 'x17': 's10', 'x18': 's10', 'x19': 's10', 'x20': 's10', 'x21': 's10', 'x22': 's10', 'x23': 's10', 'x27': 's10', 'x26': 's10', 'x28': 's11', 'x25': 's11', 'x29': 's10', 'x24': 's9', 'x30': 's9', 'x32': 's9', 'x33': 's10', 'x31': 's10'}
+active: {'x31': {'physreg': 's10', 'end': 83}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's11', 's9']
+x35: 85-92...call live? True
+current state after processing reg x35:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11', 'x13': 's11', 'x14': 's11', 'x15': 's10', 'x16': 's10', 'x17': 's10', 'x18': 's10', 'x19': 's10', 'x20': 's10', 'x21': 's10', 'x22': 's10', 'x23': 's10', 'x27': 's10', 'x26': 's10', 'x28': 's11', 'x25': 's11', 'x29': 's10', 'x24': 's9', 'x30': 's9', 'x32': 's9', 'x33': 's10', 'x31': 's10', 'x35': 's10'}
+active: {'x35': {'physreg': 's10', 'end': 92}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's11', 's9']
+x36: 86-86...call live? False
+current state after processing reg x36:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11', 'x13': 's11', 'x14': 's11', 'x15': 's10', 'x16': 's10', 'x17': 's10', 'x18': 's10', 'x19': 's10', 'x20': 's10', 'x21': 's10', 'x22': 's10', 'x23': 's10', 'x27': 's10', 'x26': 's10', 'x28': 's11', 'x25': 's11', 'x29': 's10', 'x24': 's9', 'x30': 's9', 'x32': 's9', 'x33': 's10', 'x31': 's10', 'x35': 's10', 'x36': 's9'}
+active: {'x35': {'physreg': 's10', 'end': 92}, 'x36': {'physreg': 's9', 'end': 86}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's11']
+x34: 93-93...call live? False
+current state after processing reg x34:
+assign:{'x5': 's11', 'x6': 's10', 'x7': 's10', 'x8': 's10', 'x9': 's11', 'x12': 's11', 'x13': 's11', 'x14': 's11', 'x15': 's10', 'x16': 's10', 'x17': 's10', 'x18': 's10', 'x19': 's10', 'x20': 's10', 'x21': 's10', 'x22': 's10', 'x23': 's10', 'x27': 's10', 'x26': 's10', 'x28': 's11', 'x25': 's11', 'x29': 's10', 'x24': 's9', 'x30': 's9', 'x32': 's9', 'x33': 's10', 'x31': 's10', 'x35': 's10', 'x36': 's9', 'x34': 's9'}
+active: {'x34': {'physreg': 's9', 'end': 93}}
+remaining no call reg:['t6', 't5', 't4', 't3', 't2', 't1', 't0'] 
+remaining call reg: ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's11', 's10']
+fixed instructions for proc main:
+li x10 8
+jal malloc
+sw x10 20(x2) #placing local's value in stack rather than reg
+li s11 75
+lw s10 20(x2)
+addi s10 s10 4
+sw s11 0(s10)
+li s10 25
+lw s11 20(x2)
+addi s11 s11 0
+sw s10 0(s11)
+lw s11 20(x2)
+addi s11 s11 0
+lw s11 0(s11)
+lw s10 20(x2)
+addi s10 s10 4
+lw s10 0(s10)
+addi x10 s11 0x0 #start of precall
+addi x11 s10 0x0
+addi x2 x2 -4
+sw x1 0(x2)
+jal sub
+lw x1 0(x2) 
+addi x2 x2 4
+sw x10 4(x2) #placing local's value in stack rather than reg
+lw s10 4(x2)
+addi x10 s10 0
+jal print_int
+li x10 0x0A
+jal print_char
+lw s10 20(x2)
+addi x10 s10 0x0 #start of precall
+addi x2 x2 -4
+sw x1 0(x2)
+jal addxy
+lw x1 0(x2) 
+addi x2 x2 4
+lw s10 20(x2)
+addi s10 s10 0
+lw s10 0(s10)
+addi x10 s10 0
+jal print_int
+li x10 0x0A
+jal print_char
+li s10 10
+sw s10 0(x2) #placing local's value in stack rather than reg
+lw s10 4(x2)
+sub s10 x0 s10
+sw s10 4(x2) #placing local's value in stack rather than reg
+lw s10 4(x2)
+addi s10 s10 2
+li s11 3
+mul s11 s10 s11
+lw s10 0(x2)
+li s9 0x0
+blt s11 s10 endWhile0
+sub s11 s11 s10
+addi s9 s9 0x1
+j whileStart0
+sw s9 16(x2) #placing local's value in stack rather than reg
+lw s9 16(x2)
+addi x10 s9 0
+jal print_int
+li x10 0x0A
+jal print_char
+lw s9 4(x2)
+lw s10 0(x2)
+slt s10 s10 s9
+beqz s10 else0
+li s10 0x0
+jal x0 endIfBlock0
+li s10 0x1
+sw s10 8(x2) #placing local's value in stack rather than reg
+lw s10 4(x2)
+lw s9 20(x2)
+addi x10 s9 0x0 #start of precall
+addi x2 x2 -4
+sw x1 0(x2)
+jal addxy
+lw x1 0(x2) 
+addi x2 x2 4
+add s9 s10 x10
+sw s9 0(x2) #placing local's value in stack rather than reg
+addi x10 x0 0
+jal x0 exit
+Graphviz AST written to out.svg
